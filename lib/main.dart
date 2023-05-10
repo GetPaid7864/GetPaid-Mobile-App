@@ -9,18 +9,27 @@ import 'package:get_paid/src/recruiterModule/bottomNavBarSection/providers/botto
 import 'package:get_paid/utils/theme.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-
 import 'helpers/navigatorHelper.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
+
+// ...
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  // This widget is the root of your application. fitness app
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
