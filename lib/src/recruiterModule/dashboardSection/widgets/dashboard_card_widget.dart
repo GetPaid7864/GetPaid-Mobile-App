@@ -20,7 +20,7 @@ class DashboaedCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 125,
       //width: 100,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(13),
@@ -31,16 +31,16 @@ class DashboaedCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               count,
               style: fontW7S12(context)!
-                  .copyWith(fontWeight: FontWeight.w800, fontSize: 30),
+                  .copyWith(fontWeight: FontWeight.w800, fontSize: 28),
             ),
             SizedBox(
-              height: 15,
+              height: 10,
             ),
             Text(
               text,
@@ -48,7 +48,7 @@ class DashboaedCardWidget extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w600, fontSize: 15),
             ),
             const SizedBox(
-              height: 15,
+              height: 10,
             ),
             InkWell(
               onTap: onTap,

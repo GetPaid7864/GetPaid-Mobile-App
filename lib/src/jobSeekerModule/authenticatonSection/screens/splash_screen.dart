@@ -2,9 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
-import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/onboarding/onboarding_one_screen.dart';
+import 'package:get_paid/helpers/showsnackbar.dart';
+import 'package:get_paid/src/recruiterModule/AuthSection/screens/sign_in_screen.dart';
+import 'package:get_paid/src/recruiterModule/bottomNavBarSection/screens/bottomNavScreen.dart';
 import 'package:get_paid/utils/frontend_text_utils.dart';
 import 'package:get_paid/utils/theme.dart';
+
+import '../../../../helpers/hive_local_storage.dart';
+import '../../../../utils/text_utils.dart';
+import 'onboarding/onboarding_one_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = "SplashScreen";
@@ -23,8 +29,22 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> checkLogin() async {
+    var userToken = await HiveLocalStorage.readHiveValue(
+      boxName: TextUtils.userTokenBox,
+      key: TextUtils.userTokenKey,
+    );
+
+    var currentRoute = await HiveLocalStorage.readHiveValue(
+      boxName: TextUtils.currentRouteBox,
+      key: TextUtils.currentRouteKey,
+    );
+    dp(msg: "current router", arg: currentRoute.toString());
     Timer(const Duration(seconds: 2), () async {
-      toRemoveAll(context: context, widget: const OnBoardingScreenOne());
+      if (userToken != null && currentRoute == RecruiterSignInScreen.route) {
+        toNext(context: context, widget: BottomNavScreen());
+      } else {
+        toRemoveAll(context: context, widget: const OnBoardingScreenOne());
+      }
     });
   }
 

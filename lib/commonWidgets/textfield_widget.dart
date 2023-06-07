@@ -22,7 +22,9 @@ class TextFieldWidget extends StatelessWidget {
       this.showSuffixIcon = false,
       this.suffixIcon,
       this.obsecureText = false,
-      this.onsuffixIconTap})
+      this.onsuffixIconTap,
+      this.title = "",
+      this.showtitle = false})
       : super(key: key);
 
   final TextEditingController controller;
@@ -41,69 +43,91 @@ class TextFieldWidget extends StatelessWidget {
   final Icon? suffixIcon;
   final bool obsecureText;
   final VoidCallback? onsuffixIconTap;
+  final String title;
+  final bool showtitle;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child: Container(
-        height: textFieldHeight,
-        // width: double.infinity,
-        decoration: BoxDecoration(
-          color: AppColors.textfieldColor,
-          borderRadius: BorderRadius.circular(9),
-        ),
-        child: TextFormField(
-          // enableInteractiveSelection: true,
-
-          scrollController: scrollController,
-
-          enableSuggestions: true,
-          //   enableIMEPersonalizedLearning: true,
-          autofocus: false,
-          autocorrect: true,
-
-          maxLength: maxLengt,
-
-          enabled: enabled,
-          style: const TextStyle(
-              // textStyle: Theme.of(context).textTheme.headline4,
-              fontSize: 14,
-              fontFamily: "Poppins",
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.normal,
-              color: AppColors.blackColor),
-          inputFormatters: inputFormatters,
-          onChanged: onChanged,
-          // inputFormatters: <TextInputFormatter>[
-          //   FilteringTextInputFormatter.allow(RegExp(r'^\d+(?:\.\d+)?$')),
-          // ],
-          controller: controller,
-          keyboardType: textInputType,
-          maxLines: maxlines,
-          validator: validator,
-          obscureText: obsecureText,
-          decoration: InputDecoration(
-              isDense: true,
-              counter: const SizedBox(),
-              errorStyle: const TextStyle(height: 0.1, fontSize: 11),
-              hintStyle: fontW4S12(context)!
-                  .copyWith(color: AppColors.greyColor, fontSize: 14),
-              hintText: hintText,
-              suffixIcon: showSuffixIcon == true
-                  ? Padding(
-                      padding: const EdgeInsets.only(top: 7),
-                      child: IconButton(
-                        icon: suffixIcon!,
-                        onPressed: onsuffixIconTap,
-                        color: AppColors.textfieldColor,
-                      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          showtitle == true
+              ? Column(
+                  children: [
+                    Text(
+                      title,
+                      style: fontW7S12(context)!
+                          .copyWith(fontWeight: FontWeight.w700, fontSize: 13),
+                    ),
+                    SizedBox(
+                      height: 10,
                     )
-                  : Text(""),
-              contentPadding:
-                  EdgeInsets.only(left: 15, top: toppadding, right: 5),
-              border: InputBorder.none),
-        ),
+                  ],
+                )
+              : SizedBox(),
+          Container(
+            height: textFieldHeight,
+            // width: double.infinity,
+            decoration: BoxDecoration(
+              color: AppColors.textfieldColor,
+              borderRadius: BorderRadius.circular(9),
+            ),
+            child: TextFormField(
+              // enableInteractiveSelection: true,
+
+              scrollController: scrollController,
+
+              enableSuggestions: true,
+              //   enableIMEPersonalizedLearning: true,
+              autofocus: false,
+              autocorrect: true,
+
+              maxLength: maxLengt,
+
+              enabled: enabled,
+              style: const TextStyle(
+                  // textStyle: Theme.of(context).textTheme.headline4,
+                  fontSize: 14,
+                  fontFamily: "Poppins",
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                  color: AppColors.blackColor),
+              inputFormatters: inputFormatters,
+              onChanged: onChanged,
+              // inputFormatters: <TextInputFormatter>[
+              //   FilteringTextInputFormatter.allow(RegExp(r'^\d+(?:\.\d+)?$')),
+              // ],
+              controller: controller,
+
+              keyboardType: textInputType,
+              maxLines: maxlines,
+              validator: validator,
+              obscureText: obsecureText,
+              decoration: InputDecoration(
+                  isDense: true,
+                  counter: const SizedBox(),
+                  errorStyle: const TextStyle(height: 0.1, fontSize: 11),
+                  hintStyle: fontW4S12(context)!
+                      .copyWith(color: AppColors.greyColor, fontSize: 14),
+                  hintText: hintText,
+                  suffixIcon: showSuffixIcon == true
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 7),
+                          child: IconButton(
+                            icon: suffixIcon!,
+                            onPressed: onsuffixIconTap,
+                            color: AppColors.textfieldColor,
+                          ),
+                        )
+                      : Text(""),
+                  contentPadding:
+                      EdgeInsets.only(left: 15, top: toppadding, right: 5),
+                  border: InputBorder.none),
+            ),
+          ),
+        ],
       ),
     );
   }

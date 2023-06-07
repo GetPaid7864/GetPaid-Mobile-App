@@ -8,10 +8,11 @@ import '../../../../commonWidgets/textfield_widget.dart';
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/frontend_text_utils.dart';
 import '../../../../utils/theme.dart';
-import '../providers/authProvider.dart';
+import '../../../jobSeekerModule/authenticatonSection/providers/authProvider.dart';
 
 class UpdatePasswordScreen extends StatefulWidget {
   static String routeName = "UpdatePasswordScreen";
+
   const UpdatePasswordScreen({Key? key}) : super(key: key);
 
   @override

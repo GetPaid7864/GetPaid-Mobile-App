@@ -3,17 +3,17 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get_paid/commonWidgets/button_widget.dart';
 import 'package:get_paid/commonWidgets/textfield_widget.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
-import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/create_account_screen.dart';
-import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/fogot_password_screen.dart';
 import 'package:get_paid/utils/appcolors.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../utils/frontend_text_utils.dart';
 import '../../../../utils/theme.dart';
-import '../../backgroundCheckSection/screens/views/background_check_view.dart';
-import '../providers/authProvider.dart';
-import '../widgets/social_button_widget.dart';
+import '../../../jobSeekerModule/authenticatonSection/providers/authProvider.dart';
+import '../../../jobSeekerModule/authenticatonSection/widgets/social_button_widget.dart';
+import '../../../jobSeekerModule/backgroundCheckSection/screens/views/background_check_view.dart';
+import 'create_account_screen.dart';
+import 'fogot_password_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   static String routeName = "SignInScreen";

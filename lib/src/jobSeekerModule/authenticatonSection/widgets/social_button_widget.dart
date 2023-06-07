@@ -29,10 +29,14 @@ class SocialButtonWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SvgPicture.asset(icon),
+            SvgPicture.asset(
+              icon,
+              height: 20,
+              width: 20,
+            ),
             Text(
               text,
-              style: fontW4S12(context)!.copyWith(fontSize: 15),
+              style: fontW4S12(context)!.copyWith(fontSize: 11),
             ),
           ],
         ),

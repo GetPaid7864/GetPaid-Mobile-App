@@ -3,9 +3,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get_paid/src/recruiterModule/profileSection/widgets/review_card_widget.dart';
 
 import '../../../../../utils/theme.dart';
+import '../../models/recruiter_profile_model.dart';
 
 class ReviewsTab extends StatelessWidget {
-  const ReviewsTab({Key? key}) : super(key: key);
+  final RecruiterProfileDatum recruiterProfileDatum;
+
+  const ReviewsTab({Key? key, required this.recruiterProfileDatum})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,17 +41,19 @@ class ReviewsTab extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 20,
-                padding: EdgeInsets.symmetric(horizontal: 2),
+                itemCount: recruiterProfileDatum.reviews!.length,
+                padding: const EdgeInsets.symmetric(horizontal: 2),
                 // number of items in the list
                 shrinkWrap: false,
                 scrollDirection: Axis.vertical,
                 //physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   // returns a widget for each item in the list
-                  return const Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: ReviewCardWidget(),
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: ReviewCardWidget(
+                      review: recruiterProfileDatum.reviews![index],
+                    ),
                   );
                 },
               ),

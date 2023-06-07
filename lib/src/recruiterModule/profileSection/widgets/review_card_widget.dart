@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get_paid/src/recruiterModule/profileSection/models/recruiter_profile_model.dart';
 import 'package:get_paid/src/recruiterModule/profileSection/widgets/rating_bar_widget.dart';
 
+import '../../../../commonWidgets/cacheNetworkImageWidget.dart';
+import '../../../../helpers/date_formatter.dart';
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/theme.dart';
 
 class ReviewCardWidget extends StatelessWidget {
-  const ReviewCardWidget({Key? key}) : super(key: key);
+  final Review review;
+
+  const ReviewCardWidget({Key? key, required this.review}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +26,23 @@ class ReviewCardWidget extends StatelessWidget {
             height: 15,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Image.asset(
-                      "assets/images/avatarpng.png",
-                      height: 40,
-                      width: 40,
+                    CacheNetworkImageWidget(
+                      imgUrl: review.jobseekers!.photo.toString(),
+                      radius: 13,
+                      height: 50,
+                      width: 50,
                     ),
+                    // Image.asset(
+                    //   "assets/images/avatarpng.png",
+                    //   height: 40,
+                    //   width: 40,
+                    // ),
                     const SizedBox(
                       width: 10,
                     ),
@@ -39,7 +50,7 @@ class ReviewCardWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         RatingBarWidget(
-                          itemCount: 5,
+                          itemCount: review.rating!,
                           onRatingUpdate: (value) {},
                         ),
                         const SizedBox(
@@ -54,7 +65,7 @@ class ReviewCardWidget extends StatelessWidget {
                           height: 3,
                         ),
                         Text(
-                          "Amazing Experience. Highly recommended.",
+                          review.comment.toString(),
                           style: fontW7S12(context)!.copyWith(
                               fontWeight: FontWeight.w700,
                               fontSize: 10,
@@ -68,7 +79,7 @@ class ReviewCardWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "2 min agp",
+                      DateFormatter.dateFormatter(review.createdAt!).toString(),
                       style: fontW7S12(context)!.copyWith(
                           fontWeight: FontWeight.w700,
                           fontSize: 11,

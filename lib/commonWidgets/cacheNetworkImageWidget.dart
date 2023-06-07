@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../utils/appcolors.dart';
 
@@ -34,7 +33,6 @@ class _CacheNetworkImageWidgetState extends State<CacheNetworkImageWidget> {
     return CachedNetworkImage(
         height: widget.height,
         width: widget.width,
-
         imageBuilder: (context, imageProvider) => Container(
               width: widget.builerWidth,
               height: widget.builderHeight,
@@ -57,6 +55,12 @@ class _CacheNetworkImageWidgetState extends State<CacheNetworkImageWidget> {
               size: 22,
               //    type: SpinKitWaveType.start
             ),
-        errorWidget: (context, url, error) => const Icon(Icons.person));
+        errorWidget: (context, url, error) => Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(13),
+                color: AppColors.greyColor.withOpacity(0.3)),
+            child: const Icon(Icons.person)));
   }
 }

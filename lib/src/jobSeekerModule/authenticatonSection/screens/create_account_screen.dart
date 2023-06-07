@@ -8,12 +8,13 @@ import '../../../../commonWidgets/textfield_widget.dart';
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/frontend_text_utils.dart';
 import '../../../../utils/theme.dart';
-import '../../backgroundCheckSection/screens/views/background_check_view.dart';
-import '../providers/authProvider.dart';
-import '../widgets/social_button_widget.dart';
+import '../../../jobSeekerModule/authenticatonSection/providers/authProvider.dart';
+import '../../../jobSeekerModule/authenticatonSection/widgets/social_button_widget.dart';
+import '../../../jobSeekerModule/backgroundCheckSection/screens/views/background_check_view.dart';
 
 class SignUpScreen extends StatefulWidget {
   static String routeName = "SignUpScreen";
+
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
@@ -239,7 +240,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     text: FrontEndTextUtils.signIn,
                     radius: 12,
                     onTap: () {
-                      toRemoveAll(context: context, widget: SignInScreen());
+                      toRemoveAll(
+                          context: context, widget: const SignInScreen());
                     }),
                 const SizedBox(
                   height: 20,

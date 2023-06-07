@@ -4,7 +4,7 @@ import 'package:get_paid/src/recruiterModule/dashboardSection/screens/dashboard_
 import 'package:get_paid/src/recruiterModule/jobSection/screens/jobs_screen.dart';
 import 'package:get_paid/src/recruiterModule/profileSection/screens/my_profile_screen.dart';
 
-import '../../searchingSection/screen/search_screen.dart';
+import '../../contractsSection/screens/contracts_screen.dart';
 
 class BottomNavProvider extends ChangeNotifier {
   Widget currentScreen = const DashBoardScreen();
@@ -28,12 +28,12 @@ class BottomNavProvider extends ChangeNotifier {
         break;
       case 2:
         currentIndex = index;
-        currentScreen = const SearchScreen();
+        currentScreen = const JobScreen();
         notifyListeners();
         break;
       case 3:
         currentIndex = index;
-        currentScreen = JobScreen();
+        currentScreen = ContractsScreen();
         notifyListeners();
         break;
       case 4:

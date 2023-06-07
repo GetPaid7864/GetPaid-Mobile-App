@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../helpers/navigatorHelper.dart';
-import '../../../../helpers/showsnackbar.dart';
 import '../services/auth_services.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -57,20 +55,19 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  sendLoginApiRequest(String email, String password) async {
-    try {
-      makeLoadingTrue();
-
-      authServices.postLoginRequest(email, password).whenComplete(() {
-        makeLoadingFalse();
-      });
-
-      notifyListeners();
-    } on Exception catch (e) {
-      makeLoadingFalse();
-      showErrorSnackBarMessage(
-          context: navstate.currentState!.context, content: e.toString());
-      // TODO
-    }
-  }
+// sendLoginApiRequest(String email, String password) async {
+//   try {
+//     makeLoadingTrue();
+//
+//     authServices.postLoginRequest(email, password).whenComplete(() {
+//       makeLoadingFalse();
+//     });
+//
+//     notifyListeners();
+//   } on Exception catch (e) {
+//     makeLoadingFalse();
+//     showErrorSnackBarMessage(content: e.toString());
+//     // TODO
+//   }
+// }TODO
 }

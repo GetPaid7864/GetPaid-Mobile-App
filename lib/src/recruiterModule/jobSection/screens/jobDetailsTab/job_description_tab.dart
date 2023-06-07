@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../../../../utils/appcolors.dart';
 import '../../../../../utils/theme.dart';
+import '../../models/recruiter_all_jobs_model.dart';
 
 class JobDescriptionTab extends StatelessWidget {
-  const JobDescriptionTab({Key? key}) : super(key: key);
+  final RecruiterAllJobsDatum recruiterAllJobsDatum;
+
+  const JobDescriptionTab({Key? key, required this.recruiterAllJobsDatum})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +32,7 @@ class JobDescriptionTab extends StatelessWidget {
             RichText(
                 textAlign: TextAlign.start,
                 text: TextSpan(
-                    text:
-                        "Rhoncus senectus eget tellus auctor. Rhoncus libero faucibus in sodales suscipit sed et neque. Eu accumsan commodo volutpat tempus eu nisi arcu. Suspendisse diam in nisl rhoncus in praesent morbi feugiat. Vulputate morbi nibh sed non nascetur congue cras. Rhoncus senectus eget tellus auctor. Rhoncus libero faucibus in sodales suscipit sed et neque. Eu accumsan commodo volutpat tempus eu nisi arcu. Suspendisse diam in nisl rhoncus in praesent morbi feugiat. Vulputate morbi nibh sed non nascetur congue cras.",
+                    text: recruiterAllJobsDatum.description.toString(),
                     style: fontW3S12(context)!.copyWith(
                         color: AppColors.blackColor.withOpacity(0.6))))
           ],

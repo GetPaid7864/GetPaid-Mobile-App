@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../helpers/navigatorHelper.dart';
 import '../../../../../utils/theme.dart';
-import '../../../dashboardSection/widgets/jobs_card_widget.dart';
-import '../job_details_screen.dart';
 
 class DraftsJobsTab extends StatelessWidget {
   const DraftsJobsTab({Key? key}) : super(key: key);
@@ -38,27 +35,27 @@ class DraftsJobsTab extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 20,
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              // number of items in the list
-              shrinkWrap: false,
-              scrollDirection: Axis.vertical,
-              //physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                // returns a widget for each item in the list
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: InkWell(
-                      onTap: () {
-                        toNext(context: context, widget: JobDetailsScreen());
-                      },
-                      child: const JobCardsWidget()),
-                );
-              },
-            ),
-          ),
+          // Expanded(
+          //   child: ListView.builder(
+          //     itemCount: 20,
+          //     padding: EdgeInsets.symmetric(horizontal: 12),
+          //     // number of items in the list
+          //     shrinkWrap: false,
+          //     scrollDirection: Axis.vertical,
+          //     //physics: NeverScrollableScrollPhysics(),
+          //     itemBuilder: (BuildContext context, int index) {
+          //       // returns a widget for each item in the list
+          //       return Padding(
+          //         padding: const EdgeInsets.only(bottom: 15),
+          //         child: InkWell(
+          //             onTap: () {
+          //               toNext(context: context, widget: JobDetailsScreen());
+          //             },
+          //             child: const JobCardsWidget()),
+          //       );
+          //     },
+          //   ),
+          // ),
         ],
       ),
     );

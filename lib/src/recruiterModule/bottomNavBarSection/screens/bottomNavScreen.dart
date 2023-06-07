@@ -65,12 +65,12 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                           ? AppColors.whitecolor
                           : AppColors.whitecolor.withOpacity(0.5)),
                   bottomNavItem(
-                      path: "assets/images/bottom/searchbottom.svg",
+                      path: "assets/images/bottom/jobbottom.svg",
                       selectedColor: provider.currentIndex == 2
                           ? AppColors.whitecolor
                           : AppColors.whitecolor.withOpacity(0.5)),
                   bottomNavItem(
-                      path: "assets/images/bottom/jobbottom.svg",
+                      path: "assets/images/contract.svg",
                       selectedColor: provider.currentIndex == 3
                           ? AppColors.whitecolor
                           : AppColors.whitecolor.withOpacity(0.5)),

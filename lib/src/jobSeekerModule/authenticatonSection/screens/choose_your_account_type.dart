@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
 import 'package:get_paid/helpers/showsnackbar.dart';
 import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/sign_in_screen.dart';
+import 'package:get_paid/src/recruiterModule/AuthSection/screens/sign_in_screen.dart';
 import 'package:get_paid/utils/appcolors.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../commonWidgets/button_widget.dart';
 import '../../../../utils/frontend_text_utils.dart';
 import '../../../../utils/theme.dart';
-import '../../../recruiterModule/bottomNavBarSection/screens/bottomNavScreen.dart';
 import '../providers/authProvider.dart';
 import '../widgets/account_type_card_widget.dart';
 
@@ -145,14 +145,15 @@ class ChooseYourAccountType extends StatelessWidget {
                   onTap: () {
                     if (authProvider.selectedAccountType == null) {
                       showErrorSnackBarMessage(
-                          context: context,
                           content: "Please Select Account Type");
                     } else if (authProvider.selectedAccountType ==
                         FrontEndTextUtils.jobSeeker) {
                       toNext(context: context, widget: const SignInScreen());
                     } else if (authProvider.selectedAccountType ==
                         FrontEndTextUtils.recruiter) {
-                      toNext(context: context, widget: const BottomNavScreen());
+                      toNext(
+                          context: context,
+                          widget: const RecruiterSignInScreen());
                     }
 
                     // authProvider.sendLoginApiRequest(
