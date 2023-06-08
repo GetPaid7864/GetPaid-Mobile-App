@@ -328,7 +328,9 @@ class _PostAJobScreenState extends State<PostAJobScreen> {
                                           ),
                                           content: Column(
                                             children: [
-                                              Expanded(
+                                              SizedBox(
+                                                width: double.maxFinite,
+                                                height: 280,
                                                 child: ListView.builder(
                                                   itemCount:
                                                       recruiterJobsProvider
@@ -507,7 +509,9 @@ class _PostAJobScreenState extends State<PostAJobScreen> {
                                           ),
                                           content: Column(
                                             children: [
-                                              Expanded(
+                                              SizedBox(
+                                                width: double.maxFinite,
+                                                height: 120,
                                                 child: ListView.builder(
                                                   itemCount:
                                                       recruiterJobsProvider

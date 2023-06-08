@@ -4,7 +4,7 @@ import 'package:get_paid/src/recruiterModule/dashboardSection/Models/recruiter_d
 import 'package:get_paid/src/recruiterModule/jobSection/screens/job_details_screen.dart';
 
 import '../../../../utils/theme.dart';
-import '../widgets/dashboard_job_card_widget.dart';
+import '../widgets/all_job_card_widget.dart';
 
 class ViewAllRecruiterJobsScreen extends StatelessWidget {
   final DashboardData dashboardData;
@@ -78,7 +78,7 @@ class ViewAllRecruiterJobsScreen extends StatelessWidget {
                                 widget: JobDetailsScreen(
                                     active: dashboardData.active![index]));
                           },
-                          child: DashBoardJobCardsWidget(
+                          child: AllJobCardsWidget(
                             active: dashboardData.all![index],
                           ),
                         ),

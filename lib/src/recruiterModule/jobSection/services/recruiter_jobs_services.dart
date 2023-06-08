@@ -8,6 +8,7 @@ import 'package:get_paid/src/recruiterModule/bottomNavBarSection/screens/bottomN
 import 'package:get_paid/src/recruiterModule/dashboardSection/providers/recruiter_dashboard_provider.dart';
 import 'package:get_paid/src/recruiterModule/jobSection/models/recruiter_all_jobs_model.dart';
 import 'package:get_paid/src/recruiterModule/jobSection/models/recruiter_job_details_model.dart';
+import 'package:get_paid/src/recruiterModule/jobSection/providers/recruiter_jobs_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../helpers/navigatorHelper.dart';
@@ -17,7 +18,7 @@ import '../../../../utils/api_constants.dart';
 class RecruiterJobsServices {
   DioServices dioServices = DioServices();
 
-  ///posting signup api request
+  ///posting create job api request
   Future<Response?> createJob(
     String recruiterId,
     String title,
@@ -69,10 +70,79 @@ class RecruiterJobsServices {
     if (response.statusCode == 200) {
       showSuccessSnackBarMessage(content: "Job Created Successfully");
       Navigator.maybePop(navstate.currentState!.context);
-    } else if (response.statusCode == 400 &&
-        response.data["message"] == "User already exists!") {
-      dp(msg: "status message", arg: response.data["message"]);
-      showErrorSnackBarMessage(content: "User already exists!");
+      Provider.of<RecruiterJobsProvider>(navstate.currentState!.context,
+              listen: false)
+          .disCardJob();
+    } else {
+      dp(msg: "status message", arg: response.statusMessage.toString());
+      // showErrorSnackBarMessage(content: "Incorrect email or password.");
+    }
+
+    return response;
+  }
+
+  ///posting updating job api request
+  Future<Response?> updateJob(
+    String jobID,
+    String title,
+    String dates,
+    String time,
+    bool checkIn,
+    String checkInOccurrence,
+    String salary,
+    String salaryFrequency,
+    String jobLocation,
+    String workplace,
+    List skills,
+    String description,
+  ) async {
+    Map<String, dynamic> variables = {
+      "jobId": jobID,
+      "title": title,
+      "dates": dates,
+      "time": time,
+      "checkIn": checkIn,
+      "checkInOccurrence": checkInOccurrence,
+      "salary": salary,
+      "salaryFrequency": salaryFrequency,
+      "jobLocation": jobLocation,
+      "workplace": workplace,
+      "skills": skills,
+      "description": description
+    };
+    log(variables.toString());
+    FormData body = FormData.fromMap(variables);
+    Response response = await dioServices.putAuth(Apis.createJob, body: {
+      "jobId": jobID,
+      "title": title,
+      "dates": dates,
+      "time": time,
+      "checkIn": checkIn,
+      "checkInOccurrence": checkInOccurrence,
+      "salary": salary,
+      "salaryFrequency": salaryFrequency,
+      "jobLocation": jobLocation,
+      "workplace": workplace,
+      "skills": skills,
+      "description": description
+    });
+    var jsonResponse = response.data;
+
+    dp(msg: "json response", arg: jsonResponse);
+
+    if (response.statusCode == 200) {
+      showSuccessSnackBarMessage(content: "Job updated Successfully");
+      Navigator.maybePop(navstate.currentState!.context);
+      Provider.of<RecruiterJobsProvider>(navstate.currentState!.context,
+              listen: false)
+          .getRecruiterJobsDetailsProvider(jobID);
+      Provider.of<RecruiterDashBoardProviders>(navstate.currentState!.context,
+              listen: false)
+          .getRecruiterDashBoardDataProvider();
+
+      Provider.of<RecruiterJobsProvider>(navstate.currentState!.context,
+              listen: false)
+          .cancelEditAndDiscard();
     } else {
       dp(msg: "status message", arg: response.statusMessage.toString());
       // showErrorSnackBarMessage(content: "Incorrect email or password.");

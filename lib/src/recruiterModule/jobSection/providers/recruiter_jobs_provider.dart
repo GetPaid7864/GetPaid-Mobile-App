@@ -213,6 +213,68 @@ class RecruiterJobsProvider extends ChangeNotifier {
     }
   }
 
+  sendUpdateJobRequest(
+    String jobID,
+    String title,
+    String salary,
+    String description,
+  ) async {
+    try {
+      if (selectedDate == null) {
+        showErrorSnackBarMessage(content: "Please Choose Job Date");
+      } else if (selectedStartTime == null) {
+        showErrorSnackBarMessage(content: "Please Choose Job Start Time");
+      } else if (selectedEndTime == null) {
+        showErrorSnackBarMessage(content: "Please Choose Job End Time");
+      } else if (selectedOption == null) {
+        showErrorSnackBarMessage(content: "Please Choose CheckIn Occurrence");
+      } else if (selectedCountry == null) {
+        showErrorSnackBarMessage(content: "Please Choose Job Location");
+      } else if (selectedWorkPlace == null) {
+        showErrorSnackBarMessage(content: "Please Choose WorkPlace");
+      } else if (skillsList.isEmpty || skillsList.isEmpty) {
+        showErrorSnackBarMessage(content: "Please add least 1 skills");
+      } else {
+        String recruiterUserID = await HiveLocalStorage.readHiveValue(
+          boxName: TextUtils.recruiterIDBox,
+          key: TextUtils.recruiterIdKey,
+        );
+
+        dp(msg: "hive recruiter user id", arg: recruiterUserID.toString());
+        makeLoadingTrue();
+        recruiterJobsServices
+            .updateJob(
+          jobID,
+          //"6472183b656aa37a8b8eb011",
+          title,
+          selectedDate.toString(),
+          "$selectedStartTime-$selectedEndTime",
+          isSwitched,
+          selectedOption.toString(),
+          salary,
+          "dfdd",
+          selectedCountry.toString(),
+          selectedWorkPlace.toString(),
+          skillsList,
+          description,
+        )
+            .whenComplete(() {
+          makeLoadingFalse();
+          getAllRecruiterJobsProvider();
+          disCardJob();
+        });
+
+        notifyListeners();
+      }
+    } on Exception catch (e) {
+      makeLoadingFalse();
+      showErrorSnackBarMessage(
+        content: e.toString(),
+      );
+      // TODO
+    }
+  }
+
   disCardJob() {
     selectedDate = null;
     selectedStartTime = null;
@@ -288,5 +350,28 @@ class RecruiterJobsProvider extends ChangeNotifier {
       );
       // TODO
     }
+  }
+
+  setDateInTextFields() {
+    selectedDate =
+        DateTime.parse(recruiterJobDetailsModel!.data!.dates.toString());
+    isSwitched = recruiterJobDetailsModel!.data!.checkIn!;
+    selectedOption =
+        recruiterJobDetailsModel!.data!.checkInOccurrence.toString();
+    selectedStartTime = const TimeOfDay(hour: 2, minute: 30);
+    selectedEndTime = const TimeOfDay(hour: 4, minute: 45);
+    selectedCountry = recruiterJobDetailsModel!.data!.jobLocation.toString();
+    selectedWorkPlace = recruiterJobDetailsModel!.data!.workplace.toString();
+    skillsList.addAll(recruiterJobDetailsModel!.data!.skills!.toList());
+  }
+
+  cancelEditAndDiscard() {
+    selectedDate = null;
+    selectedOption == null;
+    selectedCountry = null;
+
+    selectedWorkPlace = null;
+    skillsList.clear();
+    notifyListeners();
   }
 }
