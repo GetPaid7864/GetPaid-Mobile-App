@@ -8,6 +8,7 @@ import 'package:get_paid/src/recruiterModule/profileSection/screens/profileTabs/
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../commonWidgets/cacheNetworkImageWidget.dart';
 import '../../../../helpers/showsnackbar.dart';
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/theme.dart';
@@ -167,7 +168,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                                                         .withOpacity(
                                                                             0.1),
                                                                   ),
-                                                                  child: Text(
+                                                                  child: const Text(
                                                                       "No",
                                                                       style: TextStyle(
                                                                           color:
@@ -202,7 +203,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10,
                                           ),
                                           SvgPicture.asset(
@@ -222,24 +223,32 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                               ],
                             ),
                           ),
-                          Positioned(
-                              left: 0,
-                              right: 0,
-                              bottom: -40,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 150),
-                                child: Container(
-                                  height: 90,
-                                  width: 70,
-                                  decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/avatarpng.png")),
-                                      borderRadius: BorderRadius.circular(90),
-                                      color: AppColors.appcolor),
-                                ),
-                              ))
+                          const Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: -40,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: CacheNetworkImageWidget(
+                                height: 90,
+                                width: 90,
+                                imgUrl: '',
+                                radius: 33,
+                                errorWidgetHeight: 50,
+                                errorWidgetWidth: 50,
+                              ),
+                            ),
+                            // child: Container(
+                            //   height: 90,
+                            //   width: 70,
+                            //   decoration: BoxDecoration(
+                            //       image: const DecorationImage(
+                            //           image: AssetImage(
+                            //               "assets/images/avatarpng.png")),
+                            //       borderRadius: BorderRadius.circular(90),
+                            //       color: AppColors.appcolor),
+                            // )
+                          )
                         ],
                       ),
                       const SizedBox(
@@ -306,7 +315,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   color: AppColors.whitecolor,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 12),
-                              indicatorPadding: EdgeInsets.only(),
+                              indicatorPadding: const EdgeInsets.only(),
                               indicatorWeight: 2,
                               indicatorSize: TabBarIndicatorSize.tab,
                               indicator: BoxDecoration(
@@ -315,7 +324,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                               indicatorColor: AppColors.appcolor,
                               labelColor: AppColors.whitecolor,
                               unselectedLabelColor: AppColors.blackColor,
-                              padding: EdgeInsets.only(),
+                              padding: const EdgeInsets.only(),
                               tabs: const [
                                 Tab(
                                   text: "About",
@@ -331,12 +340,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       ),
                       Expanded(
                         child: TabBarView(children: [
-                          AboutTab(),
+                          const AboutTab(),
                           ReviewsTab(
                             recruiterProfileDatum: recruiterProfileProvider
                                 .getRecruiterProfileModel!.data!.first,
                           ),
-                          AnalyticesTab()
+                          const AnalyticesTab()
                         ]),
                       )
                     ],

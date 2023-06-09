@@ -210,11 +210,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                               onTap: () {
                                 toNext(
                                     context: context,
-                                    widget: ViewAllRecruiterJobsScreen(
-                                      dashboardData: recruiterDashBoardProvider
-                                          .recruiterDashBoardModel!
-                                          .dashboardData!,
-                                    ));
+                                    widget: const ViewAllRecruiterJobsScreen());
                               },
                               color: AppColors.cyanColor,
                             ),
@@ -257,12 +253,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                 onTap: () {
                                   toNext(
                                       context: context,
-                                      widget: ViewAllRecruiterJobsScreen(
-                                        dashboardData:
-                                            recruiterDashBoardProvider
-                                                .recruiterDashBoardModel!
-                                                .dashboardData!,
-                                      ));
+                                      widget:
+                                          const ViewAllRecruiterJobsScreen());
                                 },
                                 child: Text(
                                   "View All",

@@ -36,57 +36,62 @@ class _RecruiterJobProposalCardsWidgetState
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CacheNetworkImageWidget(
-                  imgUrl: widget.all.proposedBy!.photo.toString(),
-                  radius: 13,
-                  height: 50,
-                  width: 50,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.all.proposedBy!.email.toString(),
-                          //   "",
-                          //  "Creative UI UX Designer",
-                          style: fontW7S12(context)!.copyWith(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
-
-                            color: AppColors.blackColor.withOpacity(0.8),
-                            //decoration: TextDecoration.underline
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          widget.all.proposedBy!.phoneNumber.toString(),
-                          //   "",
-                          //  "Creative UI UX Designer",
-                          style: fontW7S12(context)!.copyWith(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-
-                            color: AppColors.greyColor.withOpacity(0.9),
-                            //decoration: TextDecoration.underline
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
+                    CacheNetworkImageWidget(
+                      imgUrl: widget.all.proposedBy!.photo.toString(),
+                      radius: 13,
+                      height: 50,
                       width: 50,
                     ),
-                    SvgPicture.asset("assets/images/morevert.svg")
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.all.proposedBy!.email.toString(),
+                              //   "",
+                              //  "Creative UI UX Designer",
+                              style: fontW7S12(context)!.copyWith(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+
+                                color: AppColors.blackColor.withOpacity(0.8),
+                                //decoration: TextDecoration.underline
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              widget.all.proposedBy!.phoneNumber.toString(),
+                              //   "",
+                              //  "Creative UI UX Designer",
+                              style: fontW7S12(context)!.copyWith(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 12,
+
+                                color: AppColors.greyColor.withOpacity(0.9),
+                                //decoration: TextDecoration.underline
+                              ),
+                            ),
+                          ],
+                        ),
+                        // const SizedBox(
+                        //   width: 35,
+                        // ),
+                      ],
+                    ),
                   ],
-                )
+                ),
+                SvgPicture.asset("assets/images/morevert.svg")
               ],
             ),
           ),

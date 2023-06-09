@@ -5,6 +5,7 @@ import 'package:get_paid/helpers/ApiHelpers/dio_service.dart';
 import 'package:get_paid/src/recruiterModule/AuthSection/screens/create_account_screen.dart';
 import 'package:get_paid/src/recruiterModule/AuthSection/screens/sign_in_screen.dart';
 import 'package:get_paid/src/recruiterModule/AuthSection/screens/verify_otp_screen.dart';
+import 'package:get_paid/utils/local_storage_text_utils.dart';
 
 import '../../../../helpers/hive_local_storage.dart';
 import '../../../../helpers/navigatorHelper.dart';
@@ -111,6 +112,10 @@ class RecruiterAuthServices {
           boxName: TextUtils.currentRouteBox,
           key: TextUtils.currentRouteKey,
           value: RecruiterSignUpScreen.route);
+      await HiveLocalStorage.write(
+          boxName: LocalStorageTextUtils.otpSendTimeBox,
+          key: LocalStorageTextUtils.otpSendTimeKey,
+          value: DateTime.now().toString());
 
       await HiveLocalStorage.write(
           boxName: TextUtils.userTokenBox,
@@ -122,13 +127,14 @@ class RecruiterAuthServices {
           key: TextUtils.recruiterIdKey,
           value: jsonResponse["data"]["_id"].toString());
       toRemoveAll(
-          context: navstate.currentState!.context, widget: VerifyOtpScreen());
+          context: navstate.currentState!.context,
+          widget: VerifyOtpScreen(
+            phoneNumber: phoneNumber,
+          ));
 
       showSuccessSnackBarMessage(
           content: "Registered Successfully!Otp Code Sent to your number");
-      toNext(
-          context: navstate.currentState!.context,
-          widget: const VerifyOtpScreen());
+
       String userToken = await HiveLocalStorage.readHiveValue(
         boxName: TextUtils.userTokenBox,
         key: TextUtils.userTokenKey,

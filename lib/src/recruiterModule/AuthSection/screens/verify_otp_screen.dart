@@ -1,27 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get_paid/commonWidgets/button_widget.dart';
+import 'package:get_paid/src/recruiterModule/AuthSection/screens/create_account_screen.dart';
 import 'package:get_paid/src/recruiterModule/AuthSection/screens/sign_in_screen.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
-
+import 'package:stop_watch_timer/stop_watch_timer.dart';
+import '../../../../helpers/hive_local_storage.dart';
 import '../../../../helpers/navigatorHelper.dart';
 import '../../../../helpers/showsnackbar.dart';
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/frontend_text_utils.dart';
+import '../../../../utils/local_storage_text_utils.dart';
 import '../../../../utils/theme.dart';
 import '../providers/recruiter_auth_provider.dart';
 
 class VerifyOtpScreen extends StatefulWidget {
+  final String phoneNumber;
   static String route = "/VerifyOtpScreen";
-  const VerifyOtpScreen({Key? key}) : super(key: key);
+
+  const VerifyOtpScreen({Key? key, required this.phoneNumber})
+      : super(key: key);
 
   @override
   State<VerifyOtpScreen> createState() => _VerifyOtpScreenState();
 }
 
 class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
+  int time = 0;
+  late StopWatchTimer timmer;
+  bool isDisable = true;
+
+  @override
+  void initState() {
+    startTimer();
+    super.initState();
+  }
+
+  void startTimer() {
+    timmer = StopWatchTimer(
+        presetMillisecond: StopWatchTimer.getMilliSecFromSecond(180),
+        onChange: (p0) {},
+        mode: StopWatchMode.countDown,
+        onEnded: () {
+          // timmer.onResetTimer();
+          setState(() {
+            isDisable = false;
+          });
+        });
+    timmer.onStartTimer();
+  }
+
+  @override
+  void dispose() {
+    timmer.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<RecruiterAuthProvider>(
@@ -166,7 +202,94 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 200,
+                  height: 150,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: StreamBuilder<int>(
+                      stream: timmer.rawTime,
+                      initialData: 0,
+                      builder: (contxt, snap) {
+                        //
+                        final displayTime = StopWatchTimer.getDisplayTime(
+                          snap.data ?? 0,
+                          minute: true,
+                          second: true,
+                          hours: true,
+                          milliSecond: false,
+                        );
+                        return Text(
+                          displayTime,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: AppColors.blackColor, fontSize: 15),
+                        );
+                      }),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                //
+                Align(
+                  alignment: Alignment.center,
+                  child: InkWell(
+                    onTap: () async {
+                      if ((widget.phoneNumber.isNotEmpty)) {
+                        var cDateTime = await HiveLocalStorage.readHiveValue(
+                          boxName: LocalStorageTextUtils.otpSendTimeBox,
+                          key: LocalStorageTextUtils.otpSendTimeKey,
+                        );
+                        dp(msg: "Message", arg: cDateTime);
+                        dp(
+                            msg: "Date time",
+                            arg: DateTime.now()
+                                .difference(DateTime.parse(cDateTime))
+                                .inMinutes);
+                        if (DateTime.now()
+                                .difference(DateTime.parse(cDateTime))
+                                .inMinutes >=
+                            2) {
+                          //
+                          //  authProvider.verifyPhone(isresend: true);
+                          startTimer();
+                          setState(() {
+                            isDisable = true;
+                          });
+                          showErrorSnackBarMessage(
+                            content: "Please wait.....!",
+                          );
+                        } else {
+                          showErrorSnackBarMessage(
+                            content: "Please wait for 3 minute to resend otp",
+                          );
+                        }
+                        //
+                      } else {
+                        showErrorSnackBarMessage(
+                          content: "Mobile number is required",
+                        );
+                        toRemoveAll(
+                            context: context,
+                            widget: const RecruiterSignUpScreen());
+                        // GoRouter.of(context).push(SignUpScreen.route);
+                        // toNext(
+                        //     widget: EnterMobileScreen(),
+                        //     context: navstate.currentState!.context);
+                      }
+                    },
+                    child: Text(
+                      "Resend",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: isDisable
+                              ? Colors.black.withOpacity(0.5)
+                              : Colors.black,
+                          fontSize: 16),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 25,
                 ),
                 CommonButtonWidget(
                     text: "Verify ",
@@ -174,7 +297,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                       recruiterAuthProvider.sendVerifyOtpRequest(
                           recruiterAuthProvider.otp.toString());
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 CommonButtonWidget(

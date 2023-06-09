@@ -11,6 +11,8 @@ class CacheNetworkImageWidget extends StatefulWidget {
   final double radius;
   final double? builderHeight;
   final double? builerWidth;
+  final double errorWidgetHeight;
+  final double errorWidgetWidth;
 
   const CacheNetworkImageWidget(
       {Key? key,
@@ -19,7 +21,9 @@ class CacheNetworkImageWidget extends StatefulWidget {
       this.width,
       required this.radius,
       this.builderHeight = 90,
-      this.builerWidth = 120})
+      this.builerWidth = 120,
+      this.errorWidgetHeight = 50,
+      this.errorWidgetWidth = 50})
       : super(key: key);
 
   @override
@@ -56,8 +60,8 @@ class _CacheNetworkImageWidgetState extends State<CacheNetworkImageWidget> {
               //    type: SpinKitWaveType.start
             ),
         errorWidget: (context, url, error) => Container(
-            height: 50,
-            width: 50,
+            height: widget.errorWidgetHeight,
+            width: widget.errorWidgetWidth,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13),
                 color: AppColors.greyColor.withOpacity(0.3)),

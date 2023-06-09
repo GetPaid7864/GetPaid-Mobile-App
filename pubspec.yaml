@@ -50,6 +50,7 @@ dependencies:
   lottie: ^2.2.0
   flutter_rating_bar: 4.0.1
   firebase_auth: ^4.6.1
+  stop_watch_timer: 2.0.0
 
   linkedin_login: ^2.2.1
   google_sign_in: ^6.0.1

@@ -251,9 +251,12 @@ class DioServices {
 
         // GoRouter.of(RoutesUtils.cNavigatorState.currentState!.context)
         //     .go(LoginScreen.route);
+
         toNext(
             context: navstate.currentState!.context,
-            widget: RecruiterSignInScreen());
+            widget: const RecruiterSignInScreen());
+        showErrorSnackBarMessage(
+            message: "Sesstion Expired Please LogIn Again");
         showErrorSnackBarMessage(message: "Session Expired!Please Login again");
         // Utils.pushAndRemoveUntil(page: const SignInScreen());
         throw ('User not authorised. Please login again');
