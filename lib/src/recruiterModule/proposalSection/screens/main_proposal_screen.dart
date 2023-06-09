@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get_paid/src/recruiterModule/dashboardSection/Models/recruiter_dashboard_model.dart';
 import 'package:get_paid/src/recruiterModule/proposalSection/provider/recruiter_proposal_provider.dart';
 import 'package:get_paid/src/recruiterModule/proposalSection/screens/proposalTabs/all_proposals_tab.dart';
+import 'package:get_paid/src/recruiterModule/proposalSection/screens/proposalTabs/saved_jobs_tab.dart';
 import 'package:get_paid/src/recruiterModule/proposalSection/screens/proposalTabs/shortlisted_proposals_tab.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ class _MainProposalScreenState extends State<MainProposalScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Consumer<RecruiterProposalProvider>(
           builder: (context, recruiterProposalProvider, __) {
         return LoadingOverlay(
@@ -42,7 +43,7 @@ class _MainProposalScreenState extends State<MainProposalScreen> {
             color: AppColors.appcolor,
           ),
           child: Scaffold(
-            body: recruiterProposalProvider.recruiterProposalModel!.data == null
+            body: recruiterProposalProvider.recruiterProposalModel == null
                 ? const SpinKitPulse(
                     size: 32,
                     color: AppColors.appcolor,
@@ -123,11 +124,8 @@ class _MainProposalScreenState extends State<MainProposalScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
                     const SizedBox(
-                      height: 15,
+                      height: 20,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -158,15 +156,17 @@ class _MainProposalScreenState extends State<MainProposalScreen> {
                               Tab(
                                 text: "ShortListed",
                               ),
-                              // Tab(
-                              //   text: "Drafts",
-                              // )
+                              Tab(
+                                text: "Saved",
+                              )
                             ]),
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: TabBarView(children: [
-                        AllProposalsTab(), ShortListedProposalsTab(),
+                        AllProposalsTab(),
+                        ShortListedProposalsTab(),
+                        SavedProposalsTab()
 
                         //  DraftsJobsTab()
                       ]),

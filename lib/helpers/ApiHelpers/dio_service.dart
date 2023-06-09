@@ -77,6 +77,10 @@ class DioServices {
       log(e.toString());
       if (!noInternet && e.response!.statusCode == 401) {
         log(e.toString());
+        toRemoveAll(
+            context: navstate.currentState!.context,
+            widget: const RecruiterSignInScreen());
+        showErrorSnackBarMessage(message: "Session Expired!Please Login again");
         // GoRouter.of(RoutesUtils.cNavigatorState.currentState!.context)
         //     .go(LoginScreen.route);
         // Utils.pushAndRemoveUntil(page: const SignInScreen());
@@ -244,11 +248,13 @@ class DioServices {
       log(e.toString());
       if (!noInternet && e.response!.statusCode == 401) {
         log(e.toString());
+
         // GoRouter.of(RoutesUtils.cNavigatorState.currentState!.context)
         //     .go(LoginScreen.route);
         toNext(
             context: navstate.currentState!.context,
             widget: RecruiterSignInScreen());
+        showErrorSnackBarMessage(message: "Session Expired!Please Login again");
         // Utils.pushAndRemoveUntil(page: const SignInScreen());
         throw ('User not authorised. Please login again');
       }

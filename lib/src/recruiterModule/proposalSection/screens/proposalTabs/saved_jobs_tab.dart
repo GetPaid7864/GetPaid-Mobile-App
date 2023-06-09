@@ -8,8 +8,8 @@ import '../../../../../utils/theme.dart';
 import '../../provider/recruiter_proposal_provider.dart';
 import '../../widgets/RecruiterJobProposalCardWidget.dart';
 
-class ShortListedProposalsTab extends StatelessWidget {
-  const ShortListedProposalsTab({Key? key}) : super(key: key);
+class SavedProposalsTab extends StatelessWidget {
+  const SavedProposalsTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class ShortListedProposalsTab extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Shortlisted Proposals",
+                          "Saved Proposals",
                           style: fontW7S12(context)!.copyWith(
                               fontWeight: FontWeight.w700, fontSize: 16),
                         ),
@@ -48,7 +48,7 @@ class ShortListedProposalsTab extends StatelessWidget {
                     height: 10,
                   ),
                   recruiterProposalProvider
-                          .recruiterProposalModel!.data!.shortlisted!.isEmpty
+                          .recruiterProposalModel!.data!.saved!.isEmpty
                       ? Center(
                           child: Column(
                             children: const [
@@ -66,10 +66,7 @@ class ShortListedProposalsTab extends StatelessWidget {
                       : Expanded(
                           child: ListView.builder(
                             itemCount: recruiterProposalProvider
-                                .recruiterProposalModel!
-                                .data!
-                                .shortlisted!
-                                .length,
+                                .recruiterProposalModel!.data!.saved!.length,
                             padding: EdgeInsets.symmetric(horizontal: 12),
                             // number of items in the list
                             shrinkWrap: false,
@@ -94,7 +91,7 @@ class ShortListedProposalsTab extends StatelessWidget {
                                       all: recruiterProposalProvider
                                           .recruiterProposalModel!
                                           .data!
-                                          .shortlisted![index],
+                                          .saved![index],
                                     )),
                               );
                             },
