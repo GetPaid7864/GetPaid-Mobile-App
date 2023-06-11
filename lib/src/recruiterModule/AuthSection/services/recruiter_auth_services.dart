@@ -201,4 +201,46 @@ class RecruiterAuthServices {
 
     return response;
   }
+
+  ///posting signup api request
+  Future<Response?> postResendOtp(
+    String phoneNumber,
+  ) async {
+    String recruiterUserID = await HiveLocalStorage.readHiveValue(
+      boxName: TextUtils.recruiterIDBox,
+      key: TextUtils.recruiterIdKey,
+    );
+    dp(msg: "recruiter user id", arg: recruiterUserID);
+    Map<String, dynamic> variables = {
+      "userId": recruiterUserID,
+      "phoneNumber": phoneNumber,
+    };
+    log(variables.toString());
+    // FormData body = FormData.fromMap(variables);
+    Response response = await dioServices.postAuth(Apis.resendOTP, body: {
+      "userId": recruiterUserID,
+      "phoneNumber": phoneNumber,
+    });
+    var jsonResponse = response.data;
+
+    dp(msg: "json response", arg: jsonResponse);
+
+    if (response.statusCode == 200) {
+      // await HiveLocalStorage.write(
+      //     boxName: TextUtils.currentRouteBox,
+      //     key: TextUtils.currentRouteKey,
+      //     value: VerifyOtpScreen.route);
+
+      showSuccessSnackBarMessage(content: "OTP Resented Successfully");
+      toNext(
+          context: navstate.currentState!.context,
+          widget: const RecruiterSignInScreen());
+    } else if (response.statusCode == 404) {
+      //showErrorSnackBarMessage(content: "Invalid OTP");
+    } else {
+      showErrorSnackBarMessage(content: "SomeThing Went Wrong");
+    }
+
+    return response;
+  }
 }

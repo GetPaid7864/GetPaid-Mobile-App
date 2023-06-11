@@ -8,6 +8,7 @@ class Apis {
   // static const String confirmCode = '/confirm_code';
   static const String login = 'login/recruiter';
   static const String verifyPhoneOtp = 'recruiter';
+  static const String resendOTP = 'resend-otp';
 
   static const String getDashBoardData = 'jobs/recruiter/';
 

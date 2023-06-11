@@ -7,6 +7,7 @@ import 'package:loading_overlay/loading_overlay.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+
 import '../../../../helpers/hive_local_storage.dart';
 import '../../../../helpers/navigatorHelper.dart';
 import '../../../../helpers/showsnackbar.dart';
@@ -202,7 +203,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 150,
+                  height: 60,
                 ),
                 Align(
                   alignment: Alignment.center,
@@ -248,16 +249,17 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                         if (DateTime.now()
                                 .difference(DateTime.parse(cDateTime))
                                 .inMinutes >=
-                            2) {
+                            3) {
                           //
                           //  authProvider.verifyPhone(isresend: true);
+                          recruiterAuthProvider.resendOtp(widget.phoneNumber);
                           startTimer();
                           setState(() {
                             isDisable = true;
                           });
-                          showErrorSnackBarMessage(
-                            content: "Please wait.....!",
-                          );
+                          // showErrorSnackBarMessage(
+                          //   content: "Please wait.....!",
+                          // );
                         } else {
                           showErrorSnackBarMessage(
                             content: "Please wait for 3 minute to resend otp",
@@ -289,23 +291,31 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 25,
+                  height: 60,
                 ),
                 CommonButtonWidget(
                     text: "Verify ",
+                    horizontalPadding: 15,
                     onTap: () {
                       recruiterAuthProvider.sendVerifyOtpRequest(
                           recruiterAuthProvider.otp.toString());
                     }),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 CommonButtonWidget(
                     text: "Sign In ",
+                    backgroundcolor: AppColors.appcolor,
+                    bordercolor: AppColors.appcolor,
+                    horizontalPadding: 15,
                     onTap: () {
                       toRemoveAll(
                           context: context, widget: RecruiterSignInScreen());
-                    })
+                    }),
+
+                const SizedBox(
+                  height: 35,
+                ),
               ],
             ),
           ),

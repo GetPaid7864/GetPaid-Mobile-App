@@ -21,6 +21,8 @@ class RecruiterDashBoardProviders extends ChangeNotifier {
 
   RecruiterDashBoardModel? recruiterDashBoardModel;
 
+  RecruiterDashBoardModel? recruiterSearchDashBoardModel;
+
   getRecruiterDashBoardDataProvider() async {
     try {
       Future.delayed(const Duration(seconds: 1)).whenComplete(() async {
@@ -28,6 +30,38 @@ class RecruiterDashBoardProviders extends ChangeNotifier {
 
         recruiterDashBoardModel = await recruiterDashBoardServices
             .getAllDashBoardData()
+            .whenComplete(() {
+          makeLoadingFalse();
+        });
+
+        notifyListeners();
+      });
+    } on Exception catch (e) {
+      makeLoadingFalse();
+      showErrorSnackBarMessage(
+        content: e.toString(),
+      );
+      // TODO
+    }
+  }
+
+  String searchText = '';
+  List<Active> filteredList = List<Active>.empty(growable: true);
+
+  initSearchMethod() async {
+    Future.delayed(const Duration(seconds: 1)).whenComplete(() {
+      filteredList.addAll(recruiterSearchDashBoardModel!.dashboardData!.all!);
+      notifyListeners();
+    });
+  }
+
+  getRecruiterSearchDashBoardDataProvider() async {
+    try {
+      Future.delayed(const Duration(seconds: 1)).whenComplete(() async {
+        makeLoadingTrue();
+
+        recruiterSearchDashBoardModel = await recruiterDashBoardServices
+            .getAllSearchDashBoardData()
             .whenComplete(() {
           makeLoadingFalse();
         });

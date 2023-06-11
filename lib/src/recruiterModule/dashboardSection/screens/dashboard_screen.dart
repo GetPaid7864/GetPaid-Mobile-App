@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_paid/commonWidgets/button_widget.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
 import 'package:get_paid/src/recruiterModule/dashboardSection/providers/recruiter_dashboard_provider.dart';
+import 'package:get_paid/src/recruiterModule/dashboardSection/screens/search_recruiter_all_jobs_screen.dart';
 import 'package:get_paid/src/recruiterModule/dashboardSection/screens/view_all_jobs.dart';
 import 'package:get_paid/src/recruiterModule/jobSection/screens/post_a_job_screen.dart';
 import 'package:get_paid/utils/appcolors.dart';
@@ -96,7 +97,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Container(
+                            child: SizedBox(
                               height: 55,
                               width: MediaQuery.of(context).size.width,
                               child: Card(
@@ -106,7 +107,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                 ),
                                 child: Row(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Expanded(
@@ -123,21 +124,32 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                     ),
                                     Expanded(
                                       flex: 7,
-                                      child: Container(
-                                        width: 200,
-                                        child: TextFormField(
-                                          decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Search For Candidates",
-                                              contentPadding: EdgeInsets.only(
-                                                  bottom: 10, left: 10),
-                                              hintStyle: fontW3S12(context)!
-                                                  .copyWith(
-                                                      fontSize: 14,
-                                                      color: AppColors.greyColor
-                                                          .withOpacity(0.6),
-                                                      fontWeight:
-                                                          FontWeight.w500)),
+                                      child: InkWell(
+                                        onTap: () {
+                                          toNext(
+                                              context: context,
+                                              widget:
+                                                  const SearchAllRecruiterJobsScreen());
+                                        },
+                                        child: SizedBox(
+                                          width: 200,
+                                          child: TextFormField(
+                                            enabled: false,
+                                            decoration: InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: "Search For All Jobs",
+                                                contentPadding:
+                                                    const EdgeInsets.only(
+                                                        bottom: 10, left: 10),
+                                                hintStyle: fontW3S12(context)!
+                                                    .copyWith(
+                                                        fontSize: 14,
+                                                        color: AppColors
+                                                            .greyColor
+                                                            .withOpacity(0.6),
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                          ),
                                         ),
                                       ),
                                     ),

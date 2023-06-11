@@ -113,6 +113,25 @@ class RecruiterAuthProvider extends ChangeNotifier {
     }
   }
 
+  resendOtp(
+    String phoneNumber,
+  ) async {
+    try {
+      makeLoadingTrue();
+      recruiterAuthServices.postResendOtp(phoneNumber).whenComplete(() {
+        makeLoadingFalse();
+      });
+
+      notifyListeners();
+    } on Exception catch (e) {
+      makeLoadingFalse();
+      showErrorSnackBarMessage(
+        content: e.toString(),
+      );
+      // TODO
+    }
+  }
+
   logoutFromApp(BuildContext context) async {
     await HiveLocalStorage.deleteHiveValue(
         boxName: TextUtils.recruiterIDBox, key: TextUtils.recruiterIdKey);
