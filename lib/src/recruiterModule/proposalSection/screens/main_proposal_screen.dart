@@ -78,7 +78,7 @@ class _MainProposalScreenState extends State<MainProposalScreen> {
                                     onPressed: () {
                                       Navigator.maybePop(context);
                                     },
-                                    icon: Icon(Icons.arrow_back)),
+                                    icon: const Icon(Icons.arrow_back)),
                                 // Text(
                                 //   "Jobs",
                                 //   style: fontW7S12(context)!.copyWith(

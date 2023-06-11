@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:get_paid/helpers/navigatorHelper.dart';
 import 'package:get_paid/src/recruiterModule/profileSection/providers/recruiter_profile_provider.dart';
-import 'package:get_paid/src/recruiterModule/profileSection/screens/profileTabs/about_tab.dart';
 import 'package:get_paid/src/recruiterModule/profileSection/screens/profileTabs/analytices_tab.dart';
 import 'package:get_paid/src/recruiterModule/profileSection/screens/profileTabs/reviews_tab.dart';
+import 'package:get_paid/src/recruiterModule/profileSection/screens/settings_screen.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../commonWidgets/cacheNetworkImageWidget.dart';
-import '../../../../helpers/showsnackbar.dart';
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/theme.dart';
-import '../../AuthSection/providers/recruiter_auth_provider.dart';
 import '../widgets/rating_bar_widget.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -32,7 +30,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Consumer<RecruiterProfileProvider>(
           builder: (context, recruiterProfileProvider, __) {
         return LoadingOverlay(
@@ -88,129 +86,27 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          InkWell(
-                                            onTap: () async {
-                                              return await showDialog(
-                                                  barrierDismissible: false,
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      backgroundColor:
-                                                          AppColors.whitecolor,
-                                                      content: SizedBox(
-                                                        height: 100,
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            const Text(
-                                                              "Do You Want To LogOut",
-                                                              style: TextStyle(
-                                                                  color: AppColors
-                                                                      .blackColor,
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
-                                                            ),
-                                                            const SizedBox(
-                                                                height: 20),
-                                                            Row(
-                                                              children: [
-                                                                Expanded(
-                                                                  child: Consumer<
-                                                                          RecruiterAuthProvider>(
-                                                                      builder: (context,
-                                                                          authProvider,
-                                                                          __) {
-                                                                    return ElevatedButton(
-                                                                      onPressed:
-                                                                          () {
-                                                                        authProvider
-                                                                            .logoutFromApp(context);
-                                                                        Navigator.maybePop(
-                                                                            context);
-
-                                                                        pe(msg: "yes selected");
-                                                                      },
-                                                                      style: ElevatedButton.styleFrom(
-                                                                          primary: Colors
-                                                                              .red
-                                                                              .shade800),
-                                                                      child:
-                                                                          const Text(
-                                                                        "Yes",
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                AppColors.whitecolor),
-                                                                      ),
-                                                                    );
-                                                                  }),
-                                                                ),
-                                                                const SizedBox(
-                                                                    width: 15),
-                                                                Expanded(
-                                                                    child:
-                                                                        ElevatedButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    pe(msg: "no selected");
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pop();
-                                                                  },
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    primary: Colors
-                                                                        .grey
-                                                                        .withOpacity(
-                                                                            0.1),
-                                                                  ),
-                                                                  child: const Text(
-                                                                      "No",
-                                                                      style: TextStyle(
-                                                                          color:
-                                                                              Colors.black)),
-                                                                ))
-                                                              ],
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    );
-                                                  });
-                                            },
-                                            child: Container(
-                                              height: 33,
-                                              width: 80,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(7),
-                                                  color: AppColors.redColor),
-                                              child: Center(
-                                                child: Text(
-                                                  "LogOut",
-                                                  style: fontW7S12(context)!
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: AppColors
-                                                              .whitecolor,
-                                                          fontSize: 12),
+                                          Row(
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  toNext(
+                                                      context: context,
+                                                      widget: SettingsScreen(
+                                                        getRecruiterProfileModel:
+                                                            recruiterProfileProvider
+                                                                .getRecruiterProfileModel!,
+                                                      ));
+                                                },
+                                                child: const Icon(
+                                                  Icons.settings,
+                                                  color: AppColors.appcolor,
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          SvgPicture.asset(
-                                            "assets/images/editicon.svg",
-                                            color: AppColors.appcolor,
-                                            // height: 150,
-                                            // width: 150,
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -230,8 +126,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             child: Align(
                               alignment: Alignment.center,
                               child: CacheNetworkImageWidget(
-                                height: 90,
-                                width: 90,
+                                height: 75,
+                                width: 75,
                                 imgUrl: '',
                                 radius: 33,
                                 errorWidgetHeight: 50,
@@ -281,24 +177,37 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           RatingBarWidget(
-                            itemCount: 5,
+                            itemCount: recruiterProfileProvider
+                                .getRecruiterProfileModel!
+                                .data!
+                                .first
+                                .stars!
+                                .length,
                             onRatingUpdate: (value) {
                               // reviewProvider.itemCountVar = value;
                               // dp(arg: "star update value", msg: value);
                             },
                           ),
-                          Text(
-                            "(${recruiterProfileProvider.getRecruiterProfileModel!.data!.first.totalReviews})",
-                            // "5 Star (6 reviews)",
-                            style: fontW7S12(context)!.copyWith(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 15,
-                                color: AppColors.blackColor.withOpacity(0.5)),
-                          ),
+                          // Text(
+                          //   "(${recruiterProfileProvider.getRecruiterProfileModel!.data!.first.totalReviews})",
+                          //   // "5 Star (6 reviews)",
+                          //   style: fontW7S12(context)!.copyWith(
+                          //       fontWeight: FontWeight.w400,
+                          //       fontSize: 15,
+                          //       color: AppColors.blackColor.withOpacity(0.5)),
+                          // ),
                         ],
                       ),
                       const SizedBox(
-                        height: 4,
+                        height: 5,
+                      ),
+                      Text(
+                        "${recruiterProfileProvider.getRecruiterProfileModel!.data!.first.stars!.length} Star (${recruiterProfileProvider.getRecruiterProfileModel!.data!.first.totalReviews} Reviews)",
+                        // "5 Star (6 reviews)",
+                        style: fontW7S12(context)!.copyWith(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            color: AppColors.blackColor.withOpacity(0.4)),
                       ),
                       const SizedBox(
                         height: 20,
@@ -326,9 +235,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                               unselectedLabelColor: AppColors.blackColor,
                               padding: const EdgeInsets.only(),
                               tabs: const [
-                                Tab(
-                                  text: "About",
-                                ),
+                                // Tab(
+                                //   text: "About",
+                                // ),
                                 Tab(
                                   text: "Review",
                                 ),
@@ -340,7 +249,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       ),
                       Expanded(
                         child: TabBarView(children: [
-                          const AboutTab(),
+                          //  const AboutTab(),
                           ReviewsTab(
                             recruiterProfileDatum: recruiterProfileProvider
                                 .getRecruiterProfileModel!.data!.first,
