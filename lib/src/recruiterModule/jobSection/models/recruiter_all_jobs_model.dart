@@ -155,7 +155,7 @@ class PostedBy {
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
         token: json["token"],
-        expireAt: DateTime.parse(json["expireAt"]),
+        //expireAt: DateTime.parse(json["expireAt"]),
       );
 
   Map<String, dynamic> toJson() => {

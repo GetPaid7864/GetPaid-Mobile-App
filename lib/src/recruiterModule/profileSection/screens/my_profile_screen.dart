@@ -35,6 +35,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           builder: (context, recruiterProfileProvider, __) {
         return LoadingOverlay(
           isLoading: recruiterProfileProvider.isLoading,
+          opacity: 0.1,
           progressIndicator: const SpinKitPulse(
             size: 25,
             color: AppColors.appcolor,

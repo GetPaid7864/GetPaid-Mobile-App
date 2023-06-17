@@ -124,7 +124,7 @@ class Active {
         status: json["status"]!,
         title: json["title"],
         dates: json["dates"],
-        recruiterId: recruiterIdValues.map[json["recruiterId"]]!,
+        //recruiterId: recruiterIdValues.map[json["recruiterId"]]!,
         time: json["time"],
         checkIn: json["checkIn"],
         checkInOccurrence: json["checkInOccurrence"],

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
-import 'package:get_paid/src/recruiterModule/AuthSection/screens/sign_in_screen.dart';
+import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/choose_your_account_type.dart';
 import 'package:get_paid/src/recruiterModule/AuthSection/services/recruiter_auth_services.dart';
 
 import '../../../../helpers/hive_local_storage.dart';
@@ -139,10 +139,9 @@ class RecruiterAuthProvider extends ChangeNotifier {
         boxName: TextUtils.userTokenBox, key: TextUtils.userTokenKey);
     await HiveLocalStorage.deleteHiveValue(
         boxName: TextUtils.currentRouteBox, key: TextUtils.currentRouteKey);
-
     toNext(
         context: navstate.currentState!.context,
-        widget: RecruiterSignInScreen());
+        widget: const ChooseYourAccountType());
 
     await showSuccessSnackBarMessage(content: "Logout Successfully");
   }

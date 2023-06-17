@@ -31,7 +31,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(builder: (context, authProvider, __) {
+    return Consumer<JobSeekerAuthProvider>(
+        builder: (context, authProvider, __) {
       return Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -241,7 +242,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     radius: 12,
                     onTap: () {
                       toRemoveAll(
-                          context: context, widget: const SignInScreen());
+                          context: context,
+                          widget: const JobSeekerSignInScreen());
                     }),
                 const SizedBox(
                   height: 20,

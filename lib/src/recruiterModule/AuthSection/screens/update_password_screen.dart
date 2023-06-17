@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
-import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/sign_in_screen.dart';
+import 'package:get_paid/src/recruiterModule/AuthSection/providers/recruiter_auth_provider.dart';
+import 'package:get_paid/src/recruiterModule/AuthSection/screens/sign_in_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../commonWidgets/button_widget.dart';
@@ -8,7 +9,6 @@ import '../../../../commonWidgets/textfield_widget.dart';
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/frontend_text_utils.dart';
 import '../../../../utils/theme.dart';
-import '../../../jobSeekerModule/authenticatonSection/providers/authProvider.dart';
 
 class RecruiterUpdatePasswordScreen extends StatefulWidget {
   static String routeName = "UpdatePasswordScreen";
@@ -29,7 +29,8 @@ class _RecruiterUpdatePasswordScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(builder: (context, authProvider, __) {
+    return Consumer<RecruiterAuthProvider>(
+        builder: (context, authProvider, __) {
       return Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -183,7 +184,8 @@ class _RecruiterUpdatePasswordScreenState
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
                         toRemoveAll(
-                            context: context, widget: const SignInScreen());
+                            context: context,
+                            widget: const RecruiterSignInScreen());
                       }
                     }),
                 const SizedBox(

@@ -87,7 +87,8 @@ class ChooseYourAccountType extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            Consumer<AuthProvider>(builder: (context, authProvider, __) {
+            Consumer<JobSeekerAuthProvider>(
+                builder: (context, authProvider, __) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -136,7 +137,8 @@ class ChooseYourAccountType extends StatelessWidget {
               );
             }),
             Spacer(),
-            Consumer<AuthProvider>(builder: (context, authProvider, __) {
+            Consumer<JobSeekerAuthProvider>(
+                builder: (context, authProvider, __) {
               return CommonButtonWidget(
                   horizontalPadding: 0,
                   text: FrontEndTextUtils.next,
@@ -148,7 +150,9 @@ class ChooseYourAccountType extends StatelessWidget {
                           content: "Please Select Account Type");
                     } else if (authProvider.selectedAccountType ==
                         FrontEndTextUtils.jobSeeker) {
-                      toNext(context: context, widget: const SignInScreen());
+                      toNext(
+                          context: context,
+                          widget: const JobSeekerSignInScreen());
                     } else if (authProvider.selectedAccountType ==
                         FrontEndTextUtils.recruiter) {
                       toNext(

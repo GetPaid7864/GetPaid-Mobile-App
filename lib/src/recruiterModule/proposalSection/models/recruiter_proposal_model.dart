@@ -11,7 +11,7 @@ String recruiterProposalModelToJson(RecruiterProposalModel data) =>
     json.encode(data.toJson());
 
 class RecruiterProposalModel {
-  RecruiterProposalData? data;
+  Data? data;
 
   RecruiterProposalModel({
     this.data,
@@ -19,9 +19,7 @@ class RecruiterProposalModel {
 
   factory RecruiterProposalModel.fromJson(Map<String, dynamic> json) =>
       RecruiterProposalModel(
-        data: json["data"] == null
-            ? null
-            : RecruiterProposalData.fromJson(json["data"]),
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -29,19 +27,18 @@ class RecruiterProposalModel {
       };
 }
 
-class RecruiterProposalData {
+class Data {
   List<All>? all;
   List<All>? shortlisted;
   List<All>? saved;
 
-  RecruiterProposalData({
+  Data({
     this.all,
     this.shortlisted,
     this.saved,
   });
 
-  factory RecruiterProposalData.fromJson(Map<String, dynamic> json) =>
-      RecruiterProposalData(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         all: json["all"] == null
             ? []
             : List<All>.from(json["all"]!.map((x) => All.fromJson(x))),
@@ -82,7 +79,6 @@ class All {
   int? v;
   String? cId;
   JobDetails? jobDetails;
-  ProposedBy? proposedBy;
 
   All({
     this.id,
@@ -101,21 +97,20 @@ class All {
     this.v,
     this.cId,
     this.jobDetails,
-    this.proposedBy,
   });
 
   factory All.fromJson(Map<String, dynamic> json) => All(
         id: json["_id"],
         bidAmount: json["bidAmount"],
-        time: json["time"],
+        time: json["time"]!,
         checkIn: json["checkIn"],
-        recruiterId: json["recruiterId"],
-        checkInOccurrence: json["checkInOccurrence"],
-        jobSeekerId: json["jobSeekerId"],
+        recruiterId: json["recruiterId"]!,
+        checkInOccurrence: json["checkInOccurrence"]!,
+        jobSeekerId: json["jobSeekerId"]!,
         coverLetter: json["coverLetter"],
-        jobId: json["jobId"],
-        type: json["type"],
-        status: json["status"],
+        jobId: json["jobId"]!,
+        type: json["type"]!,
+        status: json["status"]!,
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -123,13 +118,10 @@ class All {
             ? null
             : DateTime.parse(json["updatedAt"]),
         v: json["__v"],
-        cId: json["c_id"],
+        cId: json["c_id"]!,
         jobDetails: json["jobDetails"] == null
             ? null
             : JobDetails.fromJson(json["jobDetails"]),
-        proposedBy: json["proposedBy"] == null
-            ? null
-            : ProposedBy.fromJson(json["proposedBy"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -149,7 +141,6 @@ class All {
         "__v": v,
         "c_id": cId,
         "jobDetails": jobDetails?.toJson(),
-        "proposedBy": proposedBy?.toJson(),
       };
 }
 
@@ -157,7 +148,7 @@ class JobDetails {
   String? id;
   String? status;
   String? title;
-  String? dates;
+  DateTime? dates;
   String? recruiterId;
   String? time;
   bool? checkIn;
@@ -166,11 +157,12 @@ class JobDetails {
   String? salaryFrequency;
   String? jobLocation;
   String? workplace;
-  List<Skill>? skills;
+  List<String>? skills;
   String? description;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
+  PostedBy? postedBy;
 
   JobDetails({
     this.id,
@@ -190,25 +182,26 @@ class JobDetails {
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.postedBy,
   });
 
   factory JobDetails.fromJson(Map<String, dynamic> json) => JobDetails(
-        id: json["_id"],
-        status: json["status"],
-        title: json["title"],
-        dates: json["dates"],
-        recruiterId: json["recruiterId"],
-        time: json["time"],
+        id: json["_id"]!,
+        status: json["status"]!,
+        title: json["title"]!,
+        dates: json["dates"] == null ? null : DateTime.parse(json["dates"]),
+        recruiterId: json["recruiterId"]!,
+        time: json["time"]!,
         checkIn: json["checkIn"],
-        checkInOccurrence: json["checkInOccurrence"],
+        checkInOccurrence: json["checkInOccurrence"]!,
         salary: json["salary"],
-        salaryFrequency: json["salaryFrequency"],
-        jobLocation: json["jobLocation"],
-        workplace: json["workplace"],
-        // skills: json["skills"] == null
-        //     ? []
-        //     : List<Skill>.from(json["skills"]!.map((x) => skillValues.map[x]!)),
-        description: json["description"],
+        salaryFrequency: json["salaryFrequency"]!,
+        jobLocation: json["jobLocation"]!,
+        workplace: json["workplace"]!,
+        skills: json["skills"] == null
+            ? []
+            : List<String>.from(json["skills"]!.map((x) => x)),
+        description: json["description"]!,
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -216,13 +209,16 @@ class JobDetails {
             ? null
             : DateTime.parse(json["updatedAt"]),
         v: json["__v"],
+        postedBy: json["postedBy"] == null
+            ? null
+            : PostedBy.fromJson(json["postedBy"]),
       );
 
   Map<String, dynamic> toJson() => {
         "_id": id,
         "status": status,
         "title": title,
-        "dates": dates,
+        "dates": dates?.toIso8601String(),
         "recruiterId": recruiterId,
         "time": time,
         "checkIn": checkIn,
@@ -231,77 +227,54 @@ class JobDetails {
         "salaryFrequency": salaryFrequency,
         "jobLocation": jobLocation,
         "workplace": workplace,
-        "skills": skills == null
-            ? []
-            : List<dynamic>.from(skills!.map((x) => skillValues.reverse[x])),
+        "skills":
+            skills == null ? [] : List<dynamic>.from(skills!.map((x) => x)),
         "description": description,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "__v": v,
+        "postedBy": postedBy?.toJson(),
       };
 }
 
-enum Skill { CIVIL, ENGINEERS, BUILDING }
-
-final skillValues = EnumValues({
-  "building ": Skill.BUILDING,
-  "civil ": Skill.CIVIL,
-  "engineers": Skill.ENGINEERS
-});
-
-class ProposedBy {
+class PostedBy {
   String? id;
-  String? photo;
+  String? name;
   String? phoneNumber;
   bool? phoneVerified;
   String? email;
-  List<dynamic>? skills;
   String? type;
   Map<String, int>? stars;
-  DateTime? expireAt;
-  List<dynamic>? languages;
-  List<dynamic>? education;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
+  String? token;
+  DateTime? expireAt;
 
-  ProposedBy({
+  PostedBy({
     this.id,
-    this.photo,
+    this.name,
     this.phoneNumber,
     this.phoneVerified,
     this.email,
-    this.skills,
     this.type,
     this.stars,
-    this.expireAt,
-    this.languages,
-    this.education,
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.token,
+    this.expireAt,
   });
 
-  factory ProposedBy.fromJson(Map<String, dynamic> json) => ProposedBy(
-        id: json["_id"],
-        photo: json["photo"],
+  factory PostedBy.fromJson(Map<String, dynamic> json) => PostedBy(
+        id: json["_id"]!,
+        name: json["name"]!,
         phoneNumber: json["phoneNumber"],
         phoneVerified: json["phoneVerified"],
-        email: json["email"],
-        skills: json["skills"] == null
-            ? []
-            : List<dynamic>.from(json["skills"]!.map((x) => x)),
-        type: json["type"],
+        email: json["email"]!,
+        type: json["type"]!,
         stars:
             Map.from(json["stars"]!).map((k, v) => MapEntry<String, int>(k, v)),
-        expireAt:
-            json["expireAt"] == null ? null : DateTime.parse(json["expireAt"]),
-        languages: json["languages"] == null
-            ? []
-            : List<dynamic>.from(json["languages"]!.map((x) => x)),
-        education: json["education"] == null
-            ? []
-            : List<dynamic>.from(json["education"]!.map((x) => x)),
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
@@ -309,40 +282,24 @@ class ProposedBy {
             ? null
             : DateTime.parse(json["updatedAt"]),
         v: json["__v"],
+        token: json["token"]!,
+        expireAt:
+            json["expireAt"] == null ? null : DateTime.parse(json["expireAt"]),
       );
 
   Map<String, dynamic> toJson() => {
         "_id": id,
-        "photo": photo,
+        "name": name,
         "phoneNumber": phoneNumber,
         "phoneVerified": phoneVerified,
         "email": email,
-        "skills":
-            skills == null ? [] : List<dynamic>.from(skills!.map((x) => x)),
         "type": type,
         "stars":
             Map.from(stars!).map((k, v) => MapEntry<String, dynamic>(k, v)),
-        "expireAt": expireAt?.toIso8601String(),
-        "languages": languages == null
-            ? []
-            : List<dynamic>.from(languages!.map((x) => x)),
-        "education": education == null
-            ? []
-            : List<dynamic>.from(education!.map((x) => x)),
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "__v": v,
+        "token": token,
+        "expireAt": expireAt?.toIso8601String(),
       };
-}
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }

@@ -15,7 +15,7 @@ import '../../../jobSeekerModule/authenticatonSection/widgets/social_button_widg
 import 'create_account_screen.dart';
 
 class RecruiterSignInScreen extends StatefulWidget {
-  static String route = "/RecruiterSignInScreen";
+  static String routeName = "/RecruiterSignInScreen";
 
   const RecruiterSignInScreen({Key? key}) : super(key: key);
 

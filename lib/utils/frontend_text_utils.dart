@@ -88,6 +88,9 @@ class FrontEndTextUtils {
       "You'll be notified of the outcome.";
 
   static String backgroundCheckSuccessful = "Background Check Successful";
+  static String proposalSubmitted = "Proposal Submitted";
+  static String proposalSubmittedDesc =
+      "Thank you for submitting your proposal! We have received your submission and it is currently under review by the client.";
   static String chooseYour = "Choose Your";
   static String accountType = "Account type";
   static String jobSeeker = "Job Seeker";

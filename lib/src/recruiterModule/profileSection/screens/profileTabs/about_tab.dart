@@ -29,7 +29,7 @@ class AboutTab extends StatelessWidget {
                 textAlign: TextAlign.start,
                 text: TextSpan(
                     text:
-                        "Rhoncus senectus eget tellus auctor. Rhoncus libero faucibus in sodales suscipit sed et neque. Eu accumsan commodo volutpat tempus eu nisi arcu. Suspendisse diam in nisl rhoncus in praesent morbi feugiat. Vulputate morbi nibh sed non nascetur congue cras.",
+                        "Rhonchus senectus eget tellus auctor. Rhoncus libero faucibus in sodales suscipit sed et neque. Eu accumsan commodo volutpat tempus eu nisi arcu. Suspendisse diam in nisl rhoncus in praesent morbi feugiat. Vulputate morbi nibh sed non nascetur congue cras.",
                     style: fontW3S12(context)!.copyWith(
                         color: AppColors.blackColor.withOpacity(0.6))))
           ],

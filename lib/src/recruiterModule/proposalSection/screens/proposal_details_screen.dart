@@ -138,7 +138,8 @@ class _RecruiterProposalDetailsScreenState
                                   Row(
                                     children: [
                                       CacheNetworkImageWidget(
-                                        imgUrl: widget.all.proposedBy!.photo
+                                        imgUrl: widget
+                                            .all.jobDetails!.postedBy!.email
                                             .toString(),
                                         radius: 13,
                                         height: 50,
@@ -156,7 +157,8 @@ class _RecruiterProposalDetailsScreenState
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                widget.all.proposedBy!.email
+                                                widget.all.jobDetails!.postedBy!
+                                                    .email
                                                     .toString(),
                                                 style: fontW7S12(context)!
                                                     .copyWith(
@@ -172,8 +174,8 @@ class _RecruiterProposalDetailsScreenState
                                                 height: 5,
                                               ),
                                               Text(
-                                                widget
-                                                    .all.proposedBy!.phoneNumber
+                                                widget.all.jobDetails!.postedBy!
+                                                    .phoneNumber
                                                     .toString(),
                                                 style: fontW7S12(context)!
                                                     .copyWith(
@@ -271,7 +273,8 @@ class _RecruiterProposalDetailsScreenState
                                         height: 8,
                                       ),
                                       Text(
-                                        widget.all.checkInOccurrence.toString(),
+                                        widget.all.jobDetails!.checkInOccurrence
+                                            .toString(),
                                         style: fontW7S12(context)!.copyWith(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 12,
@@ -318,7 +321,7 @@ class _RecruiterProposalDetailsScreenState
                                             width: 1,
                                           ),
                                           Text(
-                                            "${widget.all.proposedBy!.stars!.length} Star",
+                                            "${widget.all.jobDetails!.postedBy!.stars!.length} Star",
                                             style: fontW7S12(context)!.copyWith(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 12,

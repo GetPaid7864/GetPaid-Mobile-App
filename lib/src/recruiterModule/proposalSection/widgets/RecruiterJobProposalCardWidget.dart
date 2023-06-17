@@ -52,7 +52,7 @@ class _RecruiterJobProposalCardsWidgetState
                   Row(
                     children: [
                       CacheNetworkImageWidget(
-                        imgUrl: widget.all.proposedBy!.photo.toString(),
+                        imgUrl: widget.all.jobDetails!.postedBy!.id.toString(),
                         radius: 13,
                         height: 50,
                         width: 50,
@@ -67,7 +67,8 @@ class _RecruiterJobProposalCardsWidgetState
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget.all.proposedBy!.email.toString(),
+                                widget.all.jobDetails!.postedBy!.email
+                                    .toString(),
                                 //   "",
                                 //  "Creative UI UX Designer",
                                 style: fontW7S12(context)!.copyWith(
@@ -82,7 +83,8 @@ class _RecruiterJobProposalCardsWidgetState
                                 height: 5,
                               ),
                               Text(
-                                widget.all.proposedBy!.phoneNumber.toString(),
+                                widget.all.jobDetails!.postedBy!.phoneNumber
+                                    .toString(),
                                 //   "",
                                 //  "Creative UI UX Designer",
                                 style: fontW7S12(context)!.copyWith(

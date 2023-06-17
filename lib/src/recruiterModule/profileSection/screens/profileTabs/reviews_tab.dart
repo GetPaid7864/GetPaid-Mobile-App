@@ -39,25 +39,36 @@ class ReviewsTab extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: recruiterProfileDatum.reviews!.length,
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                // number of items in the list
-                shrinkWrap: false,
-                scrollDirection: Axis.vertical,
-                //physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) {
-                  // returns a widget for each item in the list
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: ReviewCardWidget(
-                      review: recruiterProfileDatum.reviews![index],
+            recruiterProfileDatum.reviews!.isEmpty
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 120),
+                      child: Text(
+                        "No Reviews Found!",
+                        style: fontW7S12(context)!.copyWith(
+                            fontWeight: FontWeight.w700, fontSize: 14),
+                      ),
                     ),
-                  );
-                },
-              ),
-            ),
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount: recruiterProfileDatum.reviews!.length,
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                      // number of items in the list
+                      shrinkWrap: false,
+                      scrollDirection: Axis.vertical,
+                      //physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        // returns a widget for each item in the list
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: ReviewCardWidget(
+                            review: recruiterProfileDatum.reviews![index],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
           ],
         ),
       ),

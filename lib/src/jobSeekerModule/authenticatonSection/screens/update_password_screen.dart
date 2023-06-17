@@ -27,7 +27,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(builder: (context, authProvider, __) {
+    return Consumer<JobSeekerAuthProvider>(
+        builder: (context, authProvider, __) {
       return Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -181,7 +182,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
                         toRemoveAll(
-                            context: context, widget: const SignInScreen());
+                            context: context,
+                            widget: const JobSeekerSignInScreen());
                       }
                     }),
                 const SizedBox(

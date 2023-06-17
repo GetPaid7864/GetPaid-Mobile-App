@@ -1,6 +1,10 @@
 class TextUtils {
   static String currentRouteBox = "currentRouteBox";
   static String currentRouteKey = "currentRouteKey";
+
+  static String currentOnBoardingRouteBox = "currentOnBoardingRouteBox";
+  static String currentOnBoardingRouteKey = "currentOnBoardingRouteKey";
+
   static String userTokenBox = "userTokenBox";
   static String userTokenKey = "userTokenKey";
 

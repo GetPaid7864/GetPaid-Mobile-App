@@ -23,5 +23,13 @@ class Apis {
   static const String getRecruiterProfile = 'recruiter/';
 
   ///proposal Section
-  static const String getRecruiterJobProposals = 'recruiter/proposal/';
+  static const String getRecruiterJobProposals = '/jobs/proposal/';
+//  static const String getRecruiterJobProposals = 'recruiter/proposal/';
+  // jobs/proposal
+
+  ///-------------------------JobSeeker EndPoints Section-----------------------------
+
+  static const String jobSeekerLoginEndPoint = 'login/job-seeker';
+  static const String jobSeekerDashboardDataEndPoint = 'jobs/dashboard/';
+  static const String createProposal = 'proposals';
 }

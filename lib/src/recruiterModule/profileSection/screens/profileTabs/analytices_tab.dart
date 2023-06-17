@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_paid/utils/appcolors.dart';
 import 'package:get_paid/utils/theme.dart';
 
 class AnalyticesTab extends StatelessWidget {
@@ -10,7 +11,8 @@ class AnalyticesTab extends StatelessWidget {
         body: Center(
       child: Text(
         "Coming Soon",
-        style: fontW4S12(context),
+        style: fontW4S12(context)!
+            .copyWith(color: AppColors.blackColor, fontSize: 16),
       ),
     ));
   }

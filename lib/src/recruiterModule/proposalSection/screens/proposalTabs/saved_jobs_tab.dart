@@ -91,7 +91,7 @@ class SavedProposalsTab extends StatelessWidget {
                                       all: recruiterProposalProvider
                                           .recruiterProposalModel!
                                           .data!
-                                          .saved![index],
+                                          .all![index],
                                     )),
                               );
                             },

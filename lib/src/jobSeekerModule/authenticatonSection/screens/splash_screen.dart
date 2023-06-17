@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
 import 'package:get_paid/helpers/showsnackbar.dart';
+import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/sign_in_screen.dart';
+import 'package:get_paid/src/jobSeekerModule/bottomNavBar/screens/jobseeker_botttom_navbar.dart';
 import 'package:get_paid/src/recruiterModule/AuthSection/screens/sign_in_screen.dart';
 import 'package:get_paid/src/recruiterModule/bottomNavBarSection/screens/bottomNavScreen.dart';
 import 'package:get_paid/utils/frontend_text_utils.dart';
@@ -10,6 +12,7 @@ import 'package:get_paid/utils/theme.dart';
 
 import '../../../../helpers/hive_local_storage.dart';
 import '../../../../utils/text_utils.dart';
+import 'choose_your_account_type.dart';
 import 'onboarding/onboarding_one_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -38,13 +41,32 @@ class _SplashScreenState extends State<SplashScreen> {
       boxName: TextUtils.currentRouteBox,
       key: TextUtils.currentRouteKey,
     );
+
+    var currentOnBoardingRoute = await HiveLocalStorage.readHiveValue(
+      boxName: TextUtils.currentOnBoardingRouteBox,
+      key: TextUtils.currentOnBoardingRouteKey,
+    );
     dp(msg: "current router", arg: currentRoute.toString());
     Timer(const Duration(seconds: 2), () async {
-      if (userToken != null && currentRoute == RecruiterSignInScreen.route) {
-        toNext(context: context, widget: BottomNavScreen());
+      if (currentOnBoardingRoute == OnBoardingScreenOne.routeName) {
+        toNext(context: context, widget: const ChooseYourAccountType());
+        if (userToken != null &&
+            currentRoute == RecruiterSignInScreen.routeName) {
+          toRemoveAll(context: context, widget: const BottomNavScreen());
+        } else if (userToken != null &&
+            currentRoute == JobSeekerSignInScreen.routeName) {
+          toRemoveAll(
+              context: context, widget: const JobSeekerBottomNavScreen());
+        }
       } else {
-        toRemoveAll(context: context, widget: const OnBoardingScreenOne());
+        toNext(context: context, widget: const OnBoardingScreenOne());
       }
+      // if (userToken != null &&
+      //     currentRoute == RecruiterSignInScreen.routeName) {
+      //   toNext(context: context, widget: BottomNavScreen());
+      // } else {
+      //   toRemoveAll(context: context, widget: const OnBoardingScreenOne());
+      // }
     });
   }
 

@@ -9,16 +9,18 @@ import '../../../../utils/appcolors.dart';
 import '../../../../utils/frontend_text_utils.dart';
 import '../../../../utils/theme.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  static String routeName = "ForgotPasswordScreen";
+class JobSeekerForgotPasswordScreen extends StatefulWidget {
+  static String routeName = "JobSeekerForgotPasswordScreen";
 
-  const ForgotPasswordScreen({Key? key}) : super(key: key);
+  const JobSeekerForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  State<JobSeekerForgotPasswordScreen> createState() =>
+      _JobSeekerForgotPasswordScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class _JobSeekerForgotPasswordScreenState
+    extends State<JobSeekerForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
@@ -153,7 +155,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   text: FrontEndTextUtils.signIn,
                   radius: 12,
                   onTap: () {
-                    toRemoveAll(context: context, widget: SignInScreen());
+                    toRemoveAll(
+                        context: context, widget: JobSeekerSignInScreen());
                   }),
               const SizedBox(
                 height: 20,

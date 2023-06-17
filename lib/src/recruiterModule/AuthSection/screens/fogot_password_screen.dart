@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/sign_in_screen.dart';
 import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/update_password_screen.dart';
+import 'package:get_paid/src/recruiterModule/AuthSection/screens/sign_in_screen.dart';
 
 import '../../../../commonWidgets/button_widget.dart';
 import '../../../../commonWidgets/textfield_widget.dart';
@@ -155,7 +155,8 @@ class _RecruiterForgotPasswordScreenState
                   text: FrontEndTextUtils.signIn,
                   radius: 12,
                   onTap: () {
-                    toRemoveAll(context: context, widget: SignInScreen());
+                    toRemoveAll(
+                        context: context, widget: RecruiterSignInScreen());
                   }),
               const SizedBox(
                 height: 20,

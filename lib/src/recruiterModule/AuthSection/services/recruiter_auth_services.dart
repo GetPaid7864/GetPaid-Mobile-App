@@ -38,7 +38,7 @@ class RecruiterAuthServices {
       await HiveLocalStorage.write(
           boxName: TextUtils.currentRouteBox,
           key: TextUtils.currentRouteKey,
-          value: RecruiterSignInScreen.route);
+          value: RecruiterSignInScreen.routeName);
 
       await HiveLocalStorage.write(
           boxName: TextUtils.userTokenBox,

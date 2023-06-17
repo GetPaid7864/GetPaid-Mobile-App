@@ -3,28 +3,26 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get_paid/commonWidgets/button_widget.dart';
 import 'package:get_paid/commonWidgets/textfield_widget.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
+import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/fogot_password_screen.dart';
 import 'package:get_paid/utils/appcolors.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../utils/frontend_text_utils.dart';
 import '../../../../utils/theme.dart';
-import '../../../jobSeekerModule/authenticatonSection/providers/authProvider.dart';
 import '../../../jobSeekerModule/authenticatonSection/widgets/social_button_widget.dart';
-import '../../../jobSeekerModule/backgroundCheckSection/screens/views/background_check_view.dart';
-import 'create_account_screen.dart';
-import 'fogot_password_screen.dart';
+import '../providers/authProvider.dart';
 
-class SignInScreen extends StatefulWidget {
-  static String routeName = "SignInScreen";
+class JobSeekerSignInScreen extends StatefulWidget {
+  static String routeName = "/JobSeekerSignInScreen";
 
-  const SignInScreen({Key? key}) : super(key: key);
+  const JobSeekerSignInScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<JobSeekerSignInScreen> createState() => _JobSeekerSignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _JobSeekerSignInScreenState extends State<JobSeekerSignInScreen> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
@@ -32,9 +30,10 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(builder: (context, authProvider, __) {
+    return Consumer<JobSeekerAuthProvider>(
+        builder: (context, jobSeekerAuthProvider, __) {
       return LoadingOverlay(
-        isLoading: authProvider.isLoading,
+        isLoading: jobSeekerAuthProvider.isLoading,
         opacity: 0.1,
         progressIndicator: const SpinKitPulse(
           size: 40,
@@ -158,18 +157,20 @@ class _SignInScreenState extends State<SignInScreen> {
                           hintText: FrontEndTextUtils.password,
                           textInputType: TextInputType.emailAddress,
                           onsuffixIconTap: () {
-                            authProvider.visiblePasswordChange();
+                            jobSeekerAuthProvider.visiblePasswordChange();
                           },
-                          obsecureText: authProvider.showpasswordobsecure,
-                          suffixIcon: authProvider.showpasswordobsecure == true
-                              ? const Icon(
-                                  Icons.visibility_off,
-                                  color: AppColors.appcolor,
-                                )
-                              : const Icon(
-                                  Icons.visibility,
-                                  color: AppColors.appcolor,
-                                ),
+                          obsecureText:
+                              jobSeekerAuthProvider.showpasswordobsecure,
+                          suffixIcon:
+                              jobSeekerAuthProvider.showpasswordobsecure == true
+                                  ? const Icon(
+                                      Icons.visibility_off,
+                                      color: AppColors.appcolor,
+                                    )
+                                  : const Icon(
+                                      Icons.visibility,
+                                      color: AppColors.appcolor,
+                                    ),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Please Enter Password";
@@ -190,7 +191,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     onTap: () {
                       toNext(
                           context: context,
-                          widget: const ForgotPasswordScreen());
+                          widget: const JobSeekerForgotPasswordScreen());
                     },
                     child: Text(
                       FrontEndTextUtils.forgotPassword,
@@ -206,8 +207,10 @@ class _SignInScreenState extends State<SignInScreen> {
                       radius: 12,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          toNext(
-                              context: context, widget: BackgroundCheckView());
+                          jobSeekerAuthProvider.sendLoginApiRequest(
+                              emailController.text, passwordController.text);
+                          // toNext(
+                          //     context: context, widget: BackgroundCheckView());
                           // authProvider.sendLoginApiRequest(
                           //     emailController.text, passwordController.text);
                         }
@@ -223,7 +226,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       text: FrontEndTextUtils.createAccount,
                       radius: 12,
                       onTap: () {
-                        toRemoveAll(context: context, widget: SignUpScreen());
+                        // toRemoveAll(
+                        //     context: context,
+                        //     widget: const RecruiterSignUpScreen());
                       }),
                   const SizedBox(
                     height: 20,
