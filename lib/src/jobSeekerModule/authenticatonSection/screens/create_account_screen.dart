@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
 import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/sign_in_screen.dart';
+import 'package:get_paid/src/jobSeekerModule/profileSetupSection/screens/welcome_to_profile_setup_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../commonWidgets/button_widget.dart';
@@ -10,18 +11,17 @@ import '../../../../utils/frontend_text_utils.dart';
 import '../../../../utils/theme.dart';
 import '../../../jobSeekerModule/authenticatonSection/providers/authProvider.dart';
 import '../../../jobSeekerModule/authenticatonSection/widgets/social_button_widget.dart';
-import '../../../jobSeekerModule/backgroundCheckSection/screens/views/background_check_view.dart';
 
-class SignUpScreen extends StatefulWidget {
-  static String routeName = "SignUpScreen";
+class JobSeekerSignUpScreen extends StatefulWidget {
+  static String routeName = "JobSeekerSignUpScreen";
 
-  const SignUpScreen({Key? key}) : super(key: key);
+  const JobSeekerSignUpScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<JobSeekerSignUpScreen> createState() => _JobSeekerSignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _JobSeekerSignUpScreenState extends State<JobSeekerSignUpScreen> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
@@ -225,7 +225,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     radius: 12,
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        toNext(context: context, widget: BackgroundCheckView());
+                        toNext(
+                            context: context,
+                            widget: const WelcomeProfileSetupScreen());
+                        // toNext(context: context, widget: BackgroundCheckView());
                         // authProvider.sendLoginApiRequest(
                         //     emailController.text, passwordController.text);
                       }

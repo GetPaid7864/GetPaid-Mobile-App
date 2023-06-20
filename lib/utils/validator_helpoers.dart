@@ -143,11 +143,7 @@ class ValidatorHelpers {
       return "invalid phone number";
     }
 
-    if (value!.length < 10) {
-      return "invalid phone number";
-    }
-
-    if (value.length > 10) {
+    if (value.length < 10) {
       return "invalid phone number";
     }
 

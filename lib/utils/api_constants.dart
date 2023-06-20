@@ -24,6 +24,7 @@ class Apis {
 
   ///proposal Section
   static const String getRecruiterJobProposals = '/jobs/proposal/';
+
 //  static const String getRecruiterJobProposals = 'recruiter/proposal/';
   // jobs/proposal
 
@@ -32,4 +33,6 @@ class Apis {
   static const String jobSeekerLoginEndPoint = 'login/job-seeker';
   static const String jobSeekerDashboardDataEndPoint = 'jobs/dashboard/';
   static const String createProposal = 'proposals';
+  static const String getJobSeekerProfile = 'job-seeker/';
+  static const String updateJobSeeker = 'job-seeker';
 }

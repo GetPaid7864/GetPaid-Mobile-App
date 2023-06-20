@@ -41,6 +41,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   image_picker: ^0.8.6+1
+  image_cropper: ^3.0.1
   loading_overlay: ^0.3.0
   flutter_spinkit: ^5.1.0
   firebase_core: ^2.13.0
@@ -63,6 +64,7 @@ dependencies:
   date_time_format: 2.0.1
   country_picker: ^2.0.20
   jiffy: 5.0.1
+  dotted_border: ^2.0.0+3
 
 
 dev_dependencies:
@@ -108,16 +110,16 @@ flutter:
     # list giving the asset and other descriptors for the font. For
     # example:
   fonts:
-      - family: Inter
-        fonts:
-          - asset: assets/fonts/Inter-Black.ttf
-          - asset: assets/fonts/Inter-Bold.ttf
-          - asset: assets/fonts/Inter-Light.ttf
-          - asset: assets/fonts/Inter-Medium.ttf
-          - asset: assets/fonts/Inter-Regular.ttf
-          - asset: assets/fonts/Inter-SemiBold.ttf
-          - asset: assets/fonts/Inter-ExtraLight.ttf
-          - asset: assets/fonts/Inter-Thin.ttf
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Black.ttf
+        - asset: assets/fonts/Inter-Bold.ttf
+        - asset: assets/fonts/Inter-Light.ttf
+        - asset: assets/fonts/Inter-Medium.ttf
+        - asset: assets/fonts/Inter-Regular.ttf
+        - asset: assets/fonts/Inter-SemiBold.ttf
+        - asset: assets/fonts/Inter-ExtraLight.ttf
+        - asset: assets/fonts/Inter-Thin.ttf
 
 
   #           style: italic

@@ -9,6 +9,7 @@ import 'package:get_paid/src/jobSeekerModule/bottomNavBar/providers/jobseeker_bo
 import 'package:get_paid/src/jobSeekerModule/bottomNavBar/screens/jobseeker_botttom_navbar.dart';
 import 'package:get_paid/src/jobSeekerModule/dashboardSection/providers/jobseeker_dashboard_provider.dart';
 import 'package:get_paid/src/jobSeekerModule/myProfileSecction/providers/jobseeker_myprofile_provider.dart';
+import 'package:get_paid/src/jobSeekerModule/profileSetupSection/providers/jobseeker_profile_setup_provider.dart';
 import 'package:get_paid/src/jobSeekerModule/proposalSection/providers/job_seeker_proposal_provider.dart';
 import 'package:get_paid/src/recruiterModule/AuthSection/providers/recruiter_auth_provider.dart';
 import 'package:get_paid/src/recruiterModule/AuthSection/screens/fogot_password_screen.dart';
@@ -54,6 +55,8 @@ class MyApp extends StatelessWidget {
             create: (context) => JobSeekerDashBoardProvider()),
         ChangeNotifierProvider(
             create: (context) => JobSeekerMyProfileProvider()),
+        ChangeNotifierProvider(
+            create: (context) => JobSeekerProfileSetupProvider()),
 
         ///Recruiter Providers
         ChangeNotifierProvider(create: (context) => BottomNavProvider()),
@@ -77,7 +80,8 @@ class MyApp extends StatelessWidget {
             SplashScreen.routeName: (context) => const SplashScreen(),
             RecruiterSignInScreen.routeName: (context) =>
                 const RecruiterSignInScreen(),
-            SignUpScreen.routeName: (context) => const SignUpScreen(),
+            JobSeekerSignUpScreen.routeName: (context) =>
+                const JobSeekerSignUpScreen(),
             RecruiterForgotPasswordScreen.routeName: (context) =>
                 const RecruiterForgotPasswordScreen(),
             UpdatePasswordScreen.routeName: (context) =>
@@ -87,6 +91,8 @@ class MyApp extends StatelessWidget {
             ///JobSeeker routes
             JobSeekerForgotPasswordScreen.routeName: (context) =>
                 const JobSeekerForgotPasswordScreen(),
+            JobSeekerBottomNavScreen.routeName: (context) =>
+                const JobSeekerBottomNavScreen(),
             JobSeekerBottomNavScreen.routeName: (context) =>
                 const JobSeekerBottomNavScreen(),
           },

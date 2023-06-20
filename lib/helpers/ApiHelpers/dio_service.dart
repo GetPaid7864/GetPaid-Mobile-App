@@ -39,7 +39,8 @@ class DioServices {
   }
 
   late Dio dio;
-  var token = "195|5PxDxxPjHQ8GwVGUYhSKCAR1jNYWHYqPHr2H5pqq";
+  var token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGFubmVsIjoiNjQ4NDBiOTExZWIxMTlkZGI5NGIwOGI0IiwiaWF0IjoxNjg3MDg3MTE5LCJleHAiOjE2ODcxNzM1MTl9.7YPwwecnxkFeKRtUblH99WGhmRSeIwUY1p7gYgQsjso";
 
   Future<Response> post(String endPoint,
       {dynamic body, bool addAuthHeader = true}) async {
@@ -147,7 +148,8 @@ class DioServices {
       var headers = {
         "Accept": "application/json",
         "x-api-channel": "getpaid-app",
-        'Authorization': 'Bearer $userToken',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGFubmVsIjoiNjQ4NDBiOTExZWIxMTlkZGI5NGIwOGI0IiwiaWF0IjoxNjg3MjI2NTE3LCJleHAiOjE2ODczMTI5MTd9.Zq1IHs5_xKjhkfzB9YqvkBikA5Fkv46Mudd9PoEidYM',
         // if (addAuthHeader) "Authorization": token
         //  "Bearer ${Provider.of<UserModelProvider>(RoutesUtils.cNavigatorState.currentState!.context, listen: false).userModel.token}"
       };
