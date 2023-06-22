@@ -14,6 +14,12 @@ class JobSeekerAuthProvider extends ChangeNotifier {
   bool jobSeeker = false;
   bool recruiter = false;
 
+  String? otp;
+
+  String? userNumber;
+  String? completeUserNumber;
+  String? countryPicked;
+
   updateJobSeekerSelection() {
     jobSeeker = true;
     recruiter = false;
@@ -67,6 +73,67 @@ class JobSeekerAuthProvider extends ChangeNotifier {
       jobSeekerAuthServices.postLoginRequest(email, password).whenComplete(() {
         makeLoadingFalse();
       }).whenComplete(() {});
+
+      notifyListeners();
+    } on Exception catch (e) {
+      makeLoadingFalse();
+      showErrorSnackBarMessage(
+        content: e.toString(),
+      );
+      // TODO
+    }
+  }
+
+  sendJobSeekerRegisterApiRequest(
+    String email,
+    String password,
+  ) async {
+    dp(msg: "complete user number", arg: email);
+    try {
+      makeLoadingTrue();
+      jobSeekerAuthServices
+          .postSignupRequest(email, completeUserNumber.toString(), password)
+          .whenComplete(() {
+        makeLoadingFalse();
+      }).whenComplete(() {});
+
+      notifyListeners();
+    } on Exception catch (e) {
+      makeLoadingFalse();
+      showErrorSnackBarMessage(
+        content: e.toString(),
+      );
+      // TODO
+    }
+  }
+
+  sendVerifyOtpRequest(
+    String otp,
+  ) async {
+    try {
+      makeLoadingTrue();
+      jobSeekerAuthServices.postVerifyOtpRequest(otp).whenComplete(() {
+        makeLoadingFalse();
+      }).whenComplete(() {});
+
+      notifyListeners();
+    } on Exception catch (e) {
+      makeLoadingFalse();
+      showErrorSnackBarMessage(
+        content: e.toString(),
+      );
+      // TODO
+    }
+  }
+
+  resendOtp(
+    String phoneNumber,
+  ) async {
+    try {
+      makeLoadingTrue();
+      jobSeekerAuthServices.postResendOtp(phoneNumber).whenComplete(() {
+        makeLoadingFalse();
+      });
 
       notifyListeners();
     } on Exception catch (e) {

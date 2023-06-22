@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_paid/src/jobSeekerModule/profileSetupSection/providers/jobseeker_profile_setup_provider.dart';
-import 'package:get_paid/src/jobSeekerModule/profileSetupSection/widgets/language_card_widget.dart';
+import 'package:get_paid/src/jobSeekerModule/profileSetupSection/widgets/education_card_widget.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
 
@@ -39,6 +39,7 @@ class _AddEducationStepFourState extends State<AddEducationStepFour> {
           color: AppColors.appcolor,
         ),
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.fillColor,
           bottomNavigationBar: Column(
             mainAxisSize: MainAxisSize.min,
@@ -75,11 +76,7 @@ class _AddEducationStepFourState extends State<AddEducationStepFour> {
                               textfont: 14,
                               onTap: () {
                                 jobSeekerProfileSetupProvider
-                                    .addLanguagesProvider();
-                                // if (_formKey.currentState!.validate()) {
-                                //   jobSeekerProfileSetupProvider
-                                //       .addContactDetailsProvider();
-                                // }
+                                    .addEducationProvider();
                               }))
                     ],
                   ),
@@ -138,7 +135,28 @@ class _AddEducationStepFourState extends State<AddEducationStepFour> {
                           .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        jobSeekerProfileSetupProvider.addEducationDataToList(
+                            instituteController.text,
+                            degreeController.text,
+                            fieldOfStudyController.text,
+                            jobSeekerProfileSetupProvider.educationStartingDate!
+                                .format("d-M-Y")
+                                .toString(),
+                            jobSeekerProfileSetupProvider.educationEndingDate!
+                                .format("d-M-Y")
+                                .toString(),
+                            gradesController.text);
+
+                        instituteController.clear();
+                        degreeController.clear();
+                        fieldOfStudyController.clear();
+                        jobSeekerProfileSetupProvider.educationStartingDate =
+                            null;
+                        jobSeekerProfileSetupProvider.educationEndingDate =
+                            null;
+                        gradesController.clear();
+                      },
                       child: Text(
                         "Save",
                         style: fontW7S12(context)!.copyWith(
@@ -298,49 +316,40 @@ class _AddEducationStepFourState extends State<AddEducationStepFour> {
                 const SizedBox(
                   height: 10,
                 ),
-                if (jobSeekerProfileSetupProvider.languageList.isNotEmpty) ...[
+                if (jobSeekerProfileSetupProvider.educationList.isNotEmpty) ...[
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Text(
-                    "Added Languages",
+                    "Added Education",
                     style: fontW7S12(context)!
                         .copyWith(fontSize: 17, fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
                 ],
-                if (jobSeekerProfileSetupProvider.languageList.isNotEmpty) ...[
+                if (jobSeekerProfileSetupProvider.educationList.isNotEmpty) ...[
                   Expanded(
                     child: ListView.builder(
                         padding: EdgeInsets.only(),
                         itemCount:
-                            jobSeekerProfileSetupProvider.languageList.length,
+                            jobSeekerProfileSetupProvider.educationList.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 10),
-                            child: LanguageCardWidget(
-                              language: jobSeekerProfileSetupProvider
-                                  .languageList[index].language
-                                  .toString(),
-                              fluency: jobSeekerProfileSetupProvider
-                                  .languageList[index].level,
+                            child: EducationCardWidget(
                               onTap: () {
                                 jobSeekerProfileSetupProvider
-                                    .removeLanguageDataToList(index);
+                                    .removeEducationDataToList(index);
                               },
+                              addEducationModel: jobSeekerProfileSetupProvider
+                                  .educationList[index],
                             ),
                           );
                         }),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
                 ],
-                const SizedBox(
-                  height: 30,
-                ),
               ],
             ),
           ),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get_paid/helpers/imagepickerhelper.dart';
+import 'package:get_paid/src/jobSeekerModule/profileSetupSection/models/add_education_model.dart';
 import 'package:get_paid/src/jobSeekerModule/profileSetupSection/models/add_laguage_model.dart';
 import 'package:get_paid/src/jobSeekerModule/profileSetupSection/services/jobseeker_profile_setup_services.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -285,7 +286,8 @@ class JobSeekerProfileSetupProvider extends ChangeNotifier {
   ///add languages provider
   addLanguagesProvider() async {
     if (languageList.isEmpty) {
-      showErrorSnackBarMessage(content: "Please Add least one language");
+      showErrorSnackBarMessage(
+          content: "Please Add least one language to continue");
     } else {
       //   dp(msg: "language", arg: element.language);
       //    dp(msg: "level", arg: element.level);
@@ -293,6 +295,104 @@ class JobSeekerProfileSetupProvider extends ChangeNotifier {
         makeLoadingTrue();
         jobSeekerProfileSetupServices
             .addLanguages(languageList
+                // completePhoneNumber.toString(),
+                // emailController.text,
+                )
+            .whenComplete(() {
+          makeLoadingFalse();
+          // getAllRecruiterJobsProvider();
+          // disCardJob();
+        });
+
+        notifyListeners();
+      } on Exception catch (e) {
+        makeLoadingFalse();
+        showErrorSnackBarMessage(
+          content: e.toString(),
+        );
+        // TODO
+      }
+    }
+  }
+
+  /// -------------------add education section---------------------------
+
+  List<AddEducationModel> educationList = [];
+
+  addEducationDataToList(String institute, String degree, String fieldOfStudy,
+      String startDate, String endDate, String grades) {
+    educationList.add(AddEducationModel(
+        institute: institute,
+        degree: degree,
+        fieldOfStudy: fieldOfStudy,
+        startDate: startDate,
+        endDate: endDate,
+        grades: grades));
+
+    notifyListeners();
+  }
+
+  removeEducationDataToList(int index) {
+    educationList.removeAt(index);
+
+    notifyListeners();
+  }
+
+  ///add education provider
+  addEducationProvider() async {
+    if (educationList.isEmpty) {
+      showErrorSnackBarMessage(
+          content: "Please Add least one education to continue");
+    } else {
+      try {
+        makeLoadingTrue();
+        jobSeekerProfileSetupServices
+            .addEducationService(educationList
+                // completePhoneNumber.toString(),
+                // emailController.text,
+                )
+            .whenComplete(() {
+          makeLoadingFalse();
+          // getAllRecruiterJobsProvider();
+          // disCardJob();
+        });
+
+        notifyListeners();
+      } on Exception catch (e) {
+        makeLoadingFalse();
+        showErrorSnackBarMessage(
+          content: e.toString(),
+        );
+        // TODO
+      }
+    }
+  }
+
+  ///add skills section
+  List<String> skillsList = [];
+
+  addSkillToList(String institute) {
+    skillsList.add(institute);
+
+    notifyListeners();
+  }
+
+  removeSkillFromList(int index) {
+    skillsList.removeAt(index);
+
+    notifyListeners();
+  }
+
+  ///add skills provider
+  addSkillsProvider() async {
+    if (skillsList.isEmpty) {
+      showErrorSnackBarMessage(
+          content: "Please Add least one skill to continue");
+    } else {
+      try {
+        makeLoadingTrue();
+        jobSeekerProfileSetupServices
+            .addSkills(skillsList
                 // completePhoneNumber.toString(),
                 // emailController.text,
                 )

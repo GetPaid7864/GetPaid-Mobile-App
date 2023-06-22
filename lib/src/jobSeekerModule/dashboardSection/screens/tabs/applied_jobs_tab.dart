@@ -18,7 +18,7 @@ class AppliedJobsTab extends StatelessWidget {
               height: 15,
             ),
             jobSeekerDashBoardProvider
-                    .jobSeekerDashBoardModel!.data!.applied!.isEmpty
+                    .jobSeekerDashBoardModel!.data!.applied!.all!.isEmpty
                 ? const Center(
                     child: Padding(
                       padding: EdgeInsets.only(top: 150),
@@ -32,7 +32,11 @@ class AppliedJobsTab extends StatelessWidget {
                 : Expanded(
                     child: ListView.builder(
                         itemCount: jobSeekerDashBoardProvider
-                            .jobSeekerDashBoardModel!.data!.applied!.length,
+                            .jobSeekerDashBoardModel!
+                            .data!
+                            .applied!
+                            .all!
+                            .length,
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         // number of items in the list
                         shrinkWrap: false,
@@ -46,7 +50,8 @@ class AppliedJobsTab extends StatelessWidget {
                               applied: jobSeekerDashBoardProvider
                                   .jobSeekerDashBoardModel!
                                   .data!
-                                  .applied![index],
+                                  .applied!
+                                  .all![index],
                             ),
                           );
                         }),

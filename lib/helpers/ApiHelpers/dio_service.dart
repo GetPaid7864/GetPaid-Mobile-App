@@ -148,8 +148,7 @@ class DioServices {
       var headers = {
         "Accept": "application/json",
         "x-api-channel": "getpaid-app",
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGFubmVsIjoiNjQ4NDBiOTExZWIxMTlkZGI5NGIwOGI0IiwiaWF0IjoxNjg3MjI2NTE3LCJleHAiOjE2ODczMTI5MTd9.Zq1IHs5_xKjhkfzB9YqvkBikA5Fkv46Mudd9PoEidYM',
+        'Authorization': 'Bearer $userToken',
         // if (addAuthHeader) "Authorization": token
         //  "Bearer ${Provider.of<UserModelProvider>(RoutesUtils.cNavigatorState.currentState!.context, listen: false).userModel.token}"
       };

@@ -9,7 +9,7 @@ import '../../../../utils/theme.dart';
 import '../models/jobseeker_dashboard_model.dart';
 
 class JobSeekerAppliedJobDetailsScreen extends StatefulWidget {
-  final Applied applied;
+  final All applied;
 
   const JobSeekerAppliedJobDetailsScreen({Key? key, required this.applied})
       : super(key: key);

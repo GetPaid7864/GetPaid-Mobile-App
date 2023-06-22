@@ -14,6 +14,7 @@ class CustomProfileTextFieldWidget extends StatelessWidget {
 
   final Function()? onTap;
   final Function(String)? onChanged;
+  final Function(String)? onSubmit;
 
   const CustomProfileTextFieldWidget(
       {Key? key,
@@ -25,7 +26,8 @@ class CustomProfileTextFieldWidget extends StatelessWidget {
       required this.suffixIcon,
       required this.showsuffixicon,
       this.textInputType = TextInputType.text,
-      this.onChanged})
+      this.onChanged,
+      this.onSubmit})
       : super(key: key);
 
   @override
@@ -45,6 +47,7 @@ class CustomProfileTextFieldWidget extends StatelessWidget {
           validator: validator,
           onChanged: onChanged,
           keyboardType: textInputType,
+          onFieldSubmitted: onSubmit,
           decoration: InputDecoration(
               border: InputBorder.none,
               isCollapsed: false,

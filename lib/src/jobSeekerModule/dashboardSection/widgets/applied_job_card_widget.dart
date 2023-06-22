@@ -11,7 +11,7 @@ import '../../../../utils/theme.dart';
 import '../screens/jobseekerApplied_details_screen.dart';
 
 class AppliedJobCardsWidget extends StatefulWidget {
-  final Applied applied;
+  final All applied;
 
   const AppliedJobCardsWidget({
     Key? key,

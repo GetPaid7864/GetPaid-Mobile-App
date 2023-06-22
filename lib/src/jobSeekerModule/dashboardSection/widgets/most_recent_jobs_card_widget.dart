@@ -11,7 +11,7 @@ import '../../../../utils/appcolors.dart';
 import '../../../../utils/theme.dart';
 
 class MostRecentJobCardsWidget extends StatefulWidget {
-  final RecentJob recentJob;
+  final BestMatch recentJob;
 
   const MostRecentJobCardsWidget({
     Key? key,

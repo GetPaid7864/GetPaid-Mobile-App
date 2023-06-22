@@ -31,6 +31,9 @@ class Apis {
   ///-------------------------JobSeeker EndPoints Section-----------------------------
 
   static const String jobSeekerLoginEndPoint = 'login/job-seeker';
+  static const String registerJobSeeker = 'job-seeker';
+  static const String verifyOTPNew = 'verify-otp';
+
   static const String jobSeekerDashboardDataEndPoint = 'jobs/dashboard/';
   static const String createProposal = 'proposals';
   static const String getJobSeekerProfile = 'job-seeker/';

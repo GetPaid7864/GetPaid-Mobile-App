@@ -13,7 +13,7 @@ import '../../../../utils/theme.dart';
 import '../../dashboardSection/models/jobseeker_dashboard_model.dart';
 
 class SubmitProposalAppliedScreen extends StatefulWidget {
-  final Applied applied;
+  final All applied;
 
   const SubmitProposalAppliedScreen({Key? key, required this.applied})
       : super(key: key);
