@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_paid/src/jobSeekerModule/proposalSection/models/jobseeker_proposal_model.dart';
 import 'package:get_paid/src/jobSeekerModule/proposalSection/services/jobseeker_proposal_services.dart';
 
 import '../../../../helpers/showsnackbar.dart';
@@ -149,6 +150,30 @@ class JobSeekerProposalProvider extends ChangeNotifier {
 
         notifyListeners();
       }
+    } on Exception catch (e) {
+      makeLoadingFalse();
+      showErrorSnackBarMessage(
+        content: e.toString(),
+      );
+      // TODO
+    }
+  }
+
+  JobSeekerProposalModel? jobSeekerProposalModel;
+
+  getJobSeekerProposalsProvider() async {
+    try {
+      Future.delayed(const Duration(seconds: 1)).whenComplete(() async {
+        makeLoadingTrue();
+
+        jobSeekerProposalModel = await jobSeekerProposalServices
+            .getJobSeekerProposals()
+            .whenComplete(() {
+          makeLoadingFalse();
+        });
+
+        notifyListeners();
+      });
     } on Exception catch (e) {
       makeLoadingFalse();
       showErrorSnackBarMessage(

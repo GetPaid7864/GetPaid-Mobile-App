@@ -216,7 +216,10 @@ class _PostAJobScreenState extends State<PostAJobScreen> {
                                                 .selectedStartTime ==
                                             null
                                         ? "Start Time"
-                                        : "${recruiterJobsProvider.selectedStartTime!.hour}:${recruiterJobsProvider.selectedStartTime!.minute} ${recruiterJobsProvider.selectedStartTime!.period.name.toString().toUpperCase()}",
+                                        : recruiterJobsProvider
+                                            .selectedStartTime!
+                                            .format(context),
+                                    // : "${recruiterJobsProvider.selectedStartTime!.hour}:${recruiterJobsProvider.selectedStartTime!.minute} ${recruiterJobsProvider.selectedStartTime!.period.name.toString().toUpperCase()}",
                                     toppadding: 24,
                                     showSuffixIcon: true,
                                     suffixIcon: const Icon(
@@ -243,7 +246,10 @@ class _PostAJobScreenState extends State<PostAJobScreen> {
                                                 .selectedEndTime ==
                                             null
                                         ? "End Time"
-                                        : "${recruiterJobsProvider.selectedEndTime!.hour}:${recruiterJobsProvider.selectedEndTime!.minute} ${recruiterJobsProvider.selectedEndTime!.period.name.toString().toUpperCase()}",
+                                        : recruiterJobsProvider.selectedEndTime!
+                                            .format(context),
+
+                                    //  : "${recruiterJobsProvider.selectedEndTime!.hour}:${recruiterJobsProvider.selectedEndTime!.minute} ${recruiterJobsProvider.selectedEndTime!.period.name.toString().toUpperCase()}",
                                     toppadding: 24,
                                     showSuffixIcon: true,
                                     suffixIcon: const Icon(

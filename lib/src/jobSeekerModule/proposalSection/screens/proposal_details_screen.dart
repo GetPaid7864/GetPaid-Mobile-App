@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_paid/helpers/date_formatter.dart';
-import 'package:get_paid/src/recruiterModule/proposalSection/models/recruiter_proposal_model.dart';
-import 'package:get_paid/src/recruiterModule/proposalSection/provider/recruiter_proposal_provider.dart';
+
+import '../../../recruiterModule/proposalSection/provider/recruiter_proposal_provider.dart';
+import '../models/jobseeker_proposal_model.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
 
@@ -12,19 +13,19 @@ import '../../../../commonWidgets/cacheNetworkImageWidget.dart';
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/theme.dart';
 
-class RecruiterProposalDetailsScreen extends StatefulWidget {
+class JobSeekerProposalDetailsScreen extends StatefulWidget {
   final All all;
 
-  const RecruiterProposalDetailsScreen({Key? key, required this.all})
+  const JobSeekerProposalDetailsScreen({Key? key, required this.all})
       : super(key: key);
 
   @override
-  State<RecruiterProposalDetailsScreen> createState() =>
-      _RecruiterProposalDetailsScreenState();
+  State<JobSeekerProposalDetailsScreen> createState() =>
+      _JobSeekerProposalDetailsScreenState();
 }
 
-class _RecruiterProposalDetailsScreenState
-    extends State<RecruiterProposalDetailsScreen> {
+class _JobSeekerProposalDetailsScreenState
+    extends State<JobSeekerProposalDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<RecruiterProposalProvider>(
@@ -63,23 +64,24 @@ class _RecruiterProposalDetailsScreenState
                       ),
                       Expanded(
                           child: CommonButtonWidget(
-                              text: "Accept",
-                              backgroundcolor: AppColors.appcolor,
+                              text: "WithDraw",
+                              backgroundcolor: AppColors.redColor,
+                              bordercolor: AppColors.redColor,
                               horizontalPadding: 0,
                               onTap: () {
-                                recruiterProposalProvider
-                                    .sendUpdateProposalFromPendingToApprovedRequest(
-                                        widget.all.jobDetails!.postedBy!.id
-                                            .toString(),
-                                        widget.all.jobSeekerId.toString(),
-                                        widget.all.jobDetails!.id.toString(),
-                                        widget.all.bidAmount.toString(),
-                                        widget.all.coverLetter.toString(),
-                                        widget.all.time.toString(),
-                                        widget.all.time.toString(),
-                                        widget.all.checkIn!,
-                                        widget.all.checkInOccurrence
-                                            .toString());
+                                // recruiterProposalProvider
+                                //     .sendUpdateProposalFromPendingToApprovedRequest(
+                                //         widget.all.jobDetails!.postedBy!.id
+                                //             .toString(),
+                                //         widget.all.jobSeekerId.toString(),
+                                //         widget.all.jobDetails!.id.toString(),
+                                //         widget.all.bidAmount.toString(),
+                                //         widget.all.coverLetter.toString(),
+                                //         widget.all.time.toString(),
+                                //         widget.all.time.toString(),
+                                //         widget.all.checkIn!,
+                                //         widget.all.checkInOccurrence
+                                //             .toString());
                               }))
                     ],
                   ),

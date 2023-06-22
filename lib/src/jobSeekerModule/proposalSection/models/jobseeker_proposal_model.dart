@@ -1,24 +1,24 @@
 // To parse this JSON data, do
 //
-//     final jobSeekerDashBoardModel = jobSeekerDashBoardModelFromJson(jsonString);
+//     final jobSeekerProposalModel = jobSeekerProposalModelFromJson(jsonString);
 
 import 'dart:convert';
 
-JobSeekerDashBoardModel jobSeekerDashBoardModelFromJson(String str) =>
-    JobSeekerDashBoardModel.fromJson(json.decode(str));
+JobSeekerProposalModel jobSeekerProposalModelFromJson(String str) =>
+    JobSeekerProposalModel.fromJson(json.decode(str));
 
-String jobSeekerDashBoardModelToJson(JobSeekerDashBoardModel data) =>
+String jobSeekerProposalModelToJson(JobSeekerProposalModel data) =>
     json.encode(data.toJson());
 
-class JobSeekerDashBoardModel {
+class JobSeekerProposalModel {
   Data? data;
 
-  JobSeekerDashBoardModel({
+  JobSeekerProposalModel({
     this.data,
   });
 
-  factory JobSeekerDashBoardModel.fromJson(Map<String, dynamic> json) =>
-      JobSeekerDashBoardModel(
+  factory JobSeekerProposalModel.fromJson(Map<String, dynamic> json) =>
+      JobSeekerProposalModel(
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
 
@@ -28,58 +28,23 @@ class JobSeekerDashBoardModel {
 }
 
 class Data {
-  List<BestMatch>? recentJobs;
-  List<BestMatch>? bestMatch;
-  Applied? applied;
-
-  Data({
-    this.recentJobs,
-    this.bestMatch,
-    this.applied,
-  });
-
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        recentJobs: json["recentJobs"] == null
-            ? []
-            : List<BestMatch>.from(
-                json["recentJobs"]!.map((x) => BestMatch.fromJson(x))),
-        bestMatch: json["bestMatch"] == null
-            ? []
-            : List<BestMatch>.from(
-                json["bestMatch"]!.map((x) => BestMatch.fromJson(x))),
-        applied:
-            json["applied"] == null ? null : Applied.fromJson(json["applied"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "recentJobs": recentJobs == null
-            ? []
-            : List<dynamic>.from(recentJobs!.map((x) => x.toJson())),
-        "bestMatch": bestMatch == null
-            ? []
-            : List<dynamic>.from(bestMatch!.map((x) => x.toJson())),
-        "applied": applied?.toJson(),
-      };
-}
-
-class Applied {
   List<All>? all;
-  List<dynamic>? shortlisted;
+  List<All>? shortlisted;
   List<All>? saved;
 
-  Applied({
+  Data({
     this.all,
     this.shortlisted,
     this.saved,
   });
 
-  factory Applied.fromJson(Map<String, dynamic> json) => Applied(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         all: json["all"] == null
             ? []
             : List<All>.from(json["all"]!.map((x) => All.fromJson(x))),
         shortlisted: json["shortlisted"] == null
             ? []
-            : List<dynamic>.from(json["shortlisted"]!.map((x) => x)),
+            : List<All>.from(json["shortlisted"]!.map((x) => All.fromJson(x))),
         saved: json["saved"] == null
             ? []
             : List<All>.from(json["saved"]!.map((x) => All.fromJson(x))),
@@ -90,7 +55,7 @@ class Applied {
             all == null ? [] : List<dynamic>.from(all!.map((x) => x.toJson())),
         "shortlisted": shortlisted == null
             ? []
-            : List<dynamic>.from(shortlisted!.map((x) => x)),
+            : List<dynamic>.from(shortlisted!.map((x) => x.toJson())),
         "saved": saved == null
             ? []
             : List<dynamic>.from(saved!.map((x) => x.toJson())),
@@ -113,7 +78,7 @@ class All {
   DateTime? updatedAt;
   int? v;
   String? cId;
-  BestMatch? jobDetails;
+  JobDetails? jobDetails;
 
   All({
     this.id,
@@ -156,7 +121,7 @@ class All {
         cId: json["c_id"],
         jobDetails: json["jobDetails"] == null
             ? null
-            : BestMatch.fromJson(json["jobDetails"]),
+            : JobDetails.fromJson(json["jobDetails"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -179,7 +144,7 @@ class All {
       };
 }
 
-class BestMatch {
+class JobDetails {
   String? id;
   String? status;
   String? title;
@@ -199,7 +164,7 @@ class BestMatch {
   int? v;
   PostedBy? postedBy;
 
-  BestMatch({
+  JobDetails({
     this.id,
     this.status,
     this.title,
@@ -220,7 +185,7 @@ class BestMatch {
     this.postedBy,
   });
 
-  factory BestMatch.fromJson(Map<String, dynamic> json) => BestMatch(
+  factory JobDetails.fromJson(Map<String, dynamic> json) => JobDetails(
         id: json["_id"],
         status: json["status"],
         title: json["title"],

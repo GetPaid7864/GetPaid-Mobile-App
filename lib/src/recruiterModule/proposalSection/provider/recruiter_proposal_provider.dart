@@ -43,4 +43,42 @@ class RecruiterProposalProvider extends ChangeNotifier {
       // TODO
     }
   }
+
+  sendUpdateProposalFromPendingToApprovedRequest(
+      String recruiterId,
+      String jobSeekerID,
+      String jobID,
+      String bidAmount,
+      String coverLetter,
+      String selectedStartTime,
+      String selectedEndTime,
+      bool isSwitched,
+      String selectedOption) async {
+    try {
+      makeLoadingTrue();
+      recruiterProposalServices
+          .updateProposalFromPendingToApproved(
+              recruiterId,
+              jobSeekerID,
+              jobID,
+              bidAmount,
+              "$selectedStartTime-$selectedEndTime",
+              isSwitched,
+              selectedOption!,
+              coverLetter)
+          .whenComplete(() {
+        makeLoadingFalse();
+        // getAllRecruiterJobsProvider();
+        // disCardJob();
+      });
+
+      notifyListeners();
+    } on Exception catch (e) {
+      makeLoadingFalse();
+      showErrorSnackBarMessage(
+        content: e.toString(),
+      );
+      // TODO
+    }
+  }
 }

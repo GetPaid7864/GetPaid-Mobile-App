@@ -622,7 +622,10 @@ class _SubmitProposalScreenState extends State<SubmitProposalScreen> {
                                                 .selectedStartTime ==
                                             null
                                         ? "Start Time"
-                                        : "${jobSeekerProposalProvider.selectedStartTime!.hour}:${jobSeekerProposalProvider.selectedStartTime!.minute} ${jobSeekerProposalProvider.selectedStartTime!.period.name.toString().toUpperCase()}",
+                                        : jobSeekerProposalProvider
+                                            .selectedStartTime!
+                                            .format(context),
+                                    //  : "${jobSeekerProposalProvider.selectedStartTime!.hour}:${jobSeekerProposalProvider.selectedStartTime!.minute} ${jobSeekerProposalProvider.selectedStartTime!.period.name.toString().toUpperCase()}",
                                     toppadding: 24,
                                     showSuffixIcon: true,
                                     suffixIcon: const Icon(
@@ -650,7 +653,10 @@ class _SubmitProposalScreenState extends State<SubmitProposalScreen> {
                                                 .selectedEndTime ==
                                             null
                                         ? "End Time"
-                                        : "${jobSeekerProposalProvider.selectedEndTime!.hour}:${jobSeekerProposalProvider.selectedEndTime!.minute} ${jobSeekerProposalProvider.selectedEndTime!.period.name.toString().toUpperCase()}",
+                                        : jobSeekerProposalProvider
+                                            .selectedEndTime!
+                                            .format(context),
+                                    //' : "${jobSeekerProposalProvider.selectedEndTime!.hour}:${jobSeekerProposalProvider.selectedEndTime!.minute} ${jobSeekerProposalProvider.selectedEndTime!.period.name.toString().toUpperCase()}",
                                     toppadding: 24,
                                     showSuffixIcon: true,
                                     suffixIcon: const Icon(

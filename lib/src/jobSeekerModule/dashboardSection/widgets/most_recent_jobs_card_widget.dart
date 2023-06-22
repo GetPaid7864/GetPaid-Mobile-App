@@ -6,6 +6,7 @@ import 'package:get_paid/helpers/navigatorHelper.dart';
 import 'package:get_paid/src/jobSeekerModule/dashboardSection/models/jobseeker_dashboard_model.dart';
 import 'package:get_paid/src/jobSeekerModule/dashboardSection/screens/jobseeker_job_details_screen.dart';
 import 'package:get_paid/src/jobSeekerModule/proposalSection/screens/submit_a_proposal_Screen.dart';
+import 'package:readmore/readmore.dart';
 
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/theme.dart';
@@ -124,19 +125,35 @@ class _MostRecentJobCardsWidgetState extends State<MostRecentJobCardsWidget> {
             const SizedBox(
               height: 10,
             ),
+            // Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 12),
+            //     child: RichText(
+            //         text: TextSpan(
+            //       style: fontW7S12(context)!.copyWith(
+            //         fontWeight: FontWeight.w400,
+            //         fontSize: 12,
+            //         color: AppColors.blackColor.withOpacity(0.7),
+            //       ),
+            //       text: widget.recentJob.description.toString(),
+            //     ))
+            //     //"We are looking for a Creative UI UX Designer who can  looking landing page to an elegant and modern User Interface.")),
+            //     ),
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: RichText(
-                    text: TextSpan(
-                  style: fontW7S12(context)!.copyWith(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ReadMoreText(
+                widget.recentJob.description.toString(),
+                trimLines: 2,
+                style: fontW7S12(context)!.copyWith(
                     fontWeight: FontWeight.w400,
                     fontSize: 12,
-                    color: AppColors.blackColor.withOpacity(0.7),
-                  ),
-                  text: widget.recentJob.description.toString(),
-                ))
-                //"We are looking for a Creative UI UX Designer who can  looking landing page to an elegant and modern User Interface.")),
-                ),
+                    color: AppColors.blackColor.withOpacity(0.7)),
+                colorClickableText: Colors.pink,
+                trimMode: TrimMode.Line,
+                trimCollapsedText: 'Show more',
+                trimExpandedText: 'Show less',
+                moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              ),
+            ),
             const SizedBox(
               height: 15,
             ),

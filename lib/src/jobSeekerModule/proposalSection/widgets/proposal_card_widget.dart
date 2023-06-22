@@ -2,41 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_paid/commonWidgets/button_widget.dart';
 import 'package:get_paid/helpers/date_formatter.dart';
-import 'package:get_paid/helpers/navigatorHelper.dart';
-import 'package:get_paid/src/jobSeekerModule/dashboardSection/models/jobseeker_dashboard_model.dart';
-import 'package:get_paid/src/jobSeekerModule/proposalSection/screens/proposal_details_screen.dart';
-import 'package:get_paid/src/jobSeekerModule/proposalSection/screens/submit_a_proposal_applied_screen.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../../../helpers/navigatorHelper.dart';
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/theme.dart';
-import '../screens/jobseekerApplied_details_screen.dart';
+import '../models/jobseeker_proposal_model.dart';
+import '../screens/proposal_details_screen.dart';
 
-class AppliedJobCardsWidget extends StatefulWidget {
+class JobSeekerProposalsCardsWidget extends StatefulWidget {
   final All applied;
 
-  const AppliedJobCardsWidget({
+  const JobSeekerProposalsCardsWidget({
     Key? key,
     required this.applied,
   }) : super(key: key);
 
   @override
-  State<AppliedJobCardsWidget> createState() => _AppliedJobCardsWidgetState();
+  State<JobSeekerProposalsCardsWidget> createState() =>
+      _JobSeekerProposalsCardsWidgetState();
 }
 
-class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
+class _JobSeekerProposalsCardsWidgetState
+    extends State<JobSeekerProposalsCardsWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // toNext(
-        //     context: context,
-        //     widget: JobSeekerProposalDetailsScreen(
-        //       all: widget.applied,
-        //     ));
+        toNext(
+            context: context,
+            widget: JobSeekerProposalDetailsScreen(
+              all: widget.applied,
+            ));
       },
       child: Container(
-        height: 270,
+        // height: 270,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(11),
@@ -111,7 +111,7 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Text(
-                "Description",
+                "Cover Letter",
                 style: fontW7S12(context)!.copyWith(
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
@@ -124,6 +124,19 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
             const SizedBox(
               height: 10,
             ),
+            // Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 12),
+            //     child: RichText(
+            //         text: TextSpan(
+            //       style: fontW7S12(context)!.copyWith(
+            //         fontWeight: FontWeight.w400,
+            //         fontSize: 12,
+            //         color: AppColors.blackColor.withOpacity(0.7),
+            //       ),
+            //       text: widget.applied.coverLetter.toString(),
+            //     ))
+            //     //"We are looking for a Creative UI UX Designer who can  looking landing page to an elegant and modern User Interface.")),
+            //     ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: ReadMoreText(
@@ -310,6 +323,9 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
                   )
                 ],
               ),
+            ),
+            SizedBox(
+              height: 10,
             )
           ],
         ),

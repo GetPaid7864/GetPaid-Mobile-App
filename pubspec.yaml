@@ -65,6 +65,7 @@ dependencies:
   country_picker: ^2.0.20
   jiffy: 5.0.1
   dotted_border: ^2.0.0+3
+  readmore: ^2.2.0
 
 
 dev_dependencies:

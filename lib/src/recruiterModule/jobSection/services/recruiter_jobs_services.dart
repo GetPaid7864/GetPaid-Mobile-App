@@ -73,6 +73,12 @@ class RecruiterJobsServices {
       Provider.of<RecruiterJobsProvider>(navstate.currentState!.context,
               listen: false)
           .disCardJob();
+      Provider.of<RecruiterJobsProvider>(navstate.currentState!.context,
+              listen: false)
+          .getAllRecruiterJobsProvider();
+      Provider.of<RecruiterDashBoardProviders>(navstate.currentState!.context,
+              listen: false)
+          .getRecruiterDashBoardDataProvider();
     } else {
       dp(msg: "status message", arg: response.statusMessage.toString());
       // showErrorSnackBarMessage(content: "Incorrect email or password.");
