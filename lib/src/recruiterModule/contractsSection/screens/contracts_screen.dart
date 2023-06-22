@@ -2,22 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_paid/commonWidgets/button_widget.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
+import 'package:get_paid/src/recruiterModule/contractsSection/providers/recruiter_contracts_provider.dart';
 import 'package:get_paid/src/recruiterModule/contractsSection/screens/contractsTab/active_contracts.dart';
+import 'package:get_paid/src/recruiterModule/contractsSection/screens/contractsTab/all_contracts_tab.dart';
 import 'package:get_paid/src/recruiterModule/contractsSection/screens/contractsTab/draft_contracts.dart';
 import 'package:get_paid/src/recruiterModule/contractsSection/screens/contractsTab/expired_contracts.dart';
 import 'package:get_paid/src/recruiterModule/jobSection/screens/post_a_job_screen.dart';
 import 'package:get_paid/src/recruiterModule/jobSection/widgets/job_stat_card_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/theme.dart';
 
-class ContractsScreen extends StatelessWidget {
+class ContractsScreen extends StatefulWidget {
   const ContractsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ContractsScreen> createState() => _ContractsScreenState();
+}
+
+class _ContractsScreenState extends State<ContractsScreen> {
+  @override
+  void initState() {
+    context
+        .read<RecruiterContractsProvider>()
+        .getContractsOfRecruiterProvider();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         body: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           Container(
@@ -130,6 +146,9 @@ class ContractsScreen extends StatelessWidget {
                   padding: EdgeInsets.only(),
                   tabs: const [
                     Tab(
+                      text: "All",
+                    ),
+                    Tab(
                       text: "Active",
                     ),
                     Tab(
@@ -143,6 +162,7 @@ class ContractsScreen extends StatelessWidget {
           ),
           Expanded(
             child: TabBarView(children: [
+              AllContractsTab(),
               ActiveContracts(),
               ExpiredContracts(),
               DraftContracts()

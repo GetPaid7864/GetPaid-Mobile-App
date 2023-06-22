@@ -16,6 +16,7 @@ import 'package:get_paid/src/recruiterModule/AuthSection/screens/fogot_password_
 import 'package:get_paid/src/recruiterModule/AuthSection/screens/sign_in_screen.dart';
 import 'package:get_paid/src/recruiterModule/bottomNavBarSection/providers/bottom_navbar_provider.dart';
 import 'package:get_paid/src/recruiterModule/bottomNavBarSection/screens/bottomNavScreen.dart';
+import 'package:get_paid/src/recruiterModule/contractsSection/providers/recruiter_contracts_provider.dart';
 import 'package:get_paid/src/recruiterModule/dashboardSection/providers/recruiter_dashboard_provider.dart';
 import 'package:get_paid/src/recruiterModule/jobSection/providers/recruiter_jobs_provider.dart';
 import 'package:get_paid/src/recruiterModule/profileSection/providers/recruiter_profile_provider.dart';
@@ -69,6 +70,8 @@ class MyApp extends StatelessWidget {
             create: (context) => RecruiterDashBoardProviders()),
         ChangeNotifierProvider(
             create: (context) => JobSeekerProposalProvider()),
+        ChangeNotifierProvider(
+            create: (context) => RecruiterContractsProvider()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

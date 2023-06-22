@@ -27,6 +27,10 @@ class Apis {
 
   static const String updateProposalToApproved = 'proposals';
 
+  ///contracts section-----------------------------------------------------------------
+  static const String getRecruiterContracts = 'contracts/recruiter/';
+  static const String getRecruiterContractDetails = 'contracts/';
+
   //http://52.60.46.195/dev/api/v1/proposals
 
 //  static const String getRecruiterJobProposals = 'recruiter/proposal/';

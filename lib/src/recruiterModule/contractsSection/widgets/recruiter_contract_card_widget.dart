@@ -1,37 +1,46 @@
+import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_paid/commonWidgets/button_widget.dart';
+import 'package:get_paid/commonWidgets/cacheNetworkImageWidget.dart';
 import 'package:get_paid/helpers/date_formatter.dart';
-import 'package:get_paid/src/jobSeekerModule/dashboardSection/models/jobseeker_dashboard_model.dart';
+import 'package:get_paid/helpers/navigatorHelper.dart';
+
+import 'package:get_paid/src/jobSeekerModule/dashboardSection/screens/jobseeker_job_details_screen.dart';
+import 'package:get_paid/src/jobSeekerModule/proposalSection/screens/submit_a_proposal_Screen.dart';
 import 'package:readmore/readmore.dart';
+
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/theme.dart';
+import '../models/recruiter_contracts_model.dart';
 
-class AppliedJobCardsWidget extends StatefulWidget {
-  final All applied;
+class RecruiterContractCardsWidget extends StatefulWidget {
+  final All all;
 
-  const AppliedJobCardsWidget({
+  const RecruiterContractCardsWidget({
     Key? key,
-    required this.applied,
+    required this.all,
   }) : super(key: key);
 
   @override
-  State<AppliedJobCardsWidget> createState() => _AppliedJobCardsWidgetState();
+  State<RecruiterContractCardsWidget> createState() =>
+      _RecruiterContractCardsWidgetState();
 }
 
-class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
+class _RecruiterContractCardsWidgetState
+    extends State<RecruiterContractCardsWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         // toNext(
         //     context: context,
-        //     widget: JobSeekerProposalDetailsScreen(
-        //       all: widget.applied,
+        //     widget: JobSeekerJobDetailsScreen(
+        //       recentJob: widget.all,
         //     ));
       },
       child: Container(
-        height: 270,
+        // height: 260,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(11),
@@ -51,12 +60,13 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.applied.jobDetails!.title.toString(),
+                        widget.all.jobDetails!.title.toString(),
                         //   "",
-                        // "Creative UI UX Designer",
+                        //"Creative UI UX Designer",
                         style: fontW7S12(context)!.copyWith(
                           fontWeight: FontWeight.w400,
                           fontSize: 17,
+
                           color: AppColors.blackColor.withOpacity(0.8),
                           //decoration: TextDecoration.underline
                         ),
@@ -67,8 +77,10 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
                       Row(
                         children: [
                           Text(
-                            // widget.active.createdAt!.format("Y-M-d   h:i A"),
-                            "Fixed Price: \$${widget.applied.jobDetails!.salary}",
+                            // "",
+                            // widget.all.jobDetails!.createdAt!
+                            //     .format("Y-M-d   h:i A"),
+                            "Fixed Price: \$${widget.all.jobDetails!.salary}",
                             style: fontW7S12(context)!.copyWith(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
@@ -82,8 +94,8 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
                           ),
                           Text(
                             DateFormatter.dateFormatter(
-                                widget.applied.createdAt!),
-                            //"1 min ago",
+                                widget.all.jobDetails!.createdAt!),
+                            // "1 min ago",
                             style: fontW7S12(context)!.copyWith(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
@@ -101,38 +113,55 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Text(
-                "Description",
-                style: fontW7S12(context)!.copyWith(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-
-                  color: AppColors.greyColor.withOpacity(0.8),
-                  //decoration: TextDecoration.underline
-                ),
-              ),
+            Container(
+              height: 1,
+              width: double.infinity,
+              color: AppColors.greyColor.withOpacity(0.4),
             ),
             const SizedBox(
               height: 10,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: ReadMoreText(
-                widget.applied.coverLetter.toString(),
-                trimLines: 2,
-                style: fontW7S12(context)!.copyWith(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    color: AppColors.blackColor.withOpacity(0.7)),
-                colorClickableText: Colors.pink,
-                trimMode: TrimMode.Line,
-                trimCollapsedText: 'Show more',
-                trimExpandedText: 'Show less',
-                moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              child: Row(
+                children: [
+                  CacheNetworkImageWidget(
+                      imgUrl: widget.all.proposedBy!.photo.toString(),
+                      radius: 13),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${widget.all.proposedBy!.personalInfo!.firstName} ${widget.all.proposedBy!.personalInfo!.lastName}",
+                        style: fontW7S12(context)!.copyWith(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+
+                          color: AppColors.blackColor.withOpacity(0.8),
+                          //decoration: TextDecoration.underline
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        widget.all.proposedBy!.email.toString(),
+                        style: fontW7S12(context)!.copyWith(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+
+                          color: AppColors.greyColor.withOpacity(0.8),
+                          //decoration: TextDecoration.underline
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             const SizedBox(
@@ -144,7 +173,7 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
               color: AppColors.greyColor.withOpacity(0.4),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -152,10 +181,10 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(
-                        height: 5,
+                        height: 3,
                       ),
                       Text(
-                        "Status",
+                        "Last CheckIn",
                         style: fontW7S12(context)!.copyWith(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
@@ -168,15 +197,17 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
                         height: 8,
                       ),
                       Text(
-                        widget.applied.status.toString(),
+                        // "",
+                        DateFormatter.dateFormatter(
+                            widget.all.timesheets!.last.date!),
                         // widget.active.status.toString(),
                         style: fontW7S12(context)!.copyWith(
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
 
-                          color: widget.applied.status.toString() == "Active"
-                              ? AppColors.appcolor
-                              : AppColors.redColor,
+                          // color: widget.recentJob.status.toString() == "Active"
+                          //     ? AppColors.appcolor
+                          //     : AppColors.redColor,
                           //decoration: TextDecoration.underline
                         ),
                       ),
@@ -191,47 +222,10 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(
-                        height: 5,
+                        height: 3,
                       ),
                       Text(
-                        "Type",
-                        style: fontW7S12(context)!.copyWith(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-
-                          color: AppColors.greyColor.withOpacity(0.8),
-                          //decoration: TextDecoration.underline
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Text(
-                        widget.applied.jobDetails!.workplace.toString(),
-                        // widget.active.workplace.toString(),
-                        style: fontW7S12(context)!.copyWith(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-
-                          color: AppColors.blackColor.withOpacity(0.8),
-                          //decoration: TextDecoration.underline
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    height: 60,
-                    width: 1,
-                    color: AppColors.greyColor.withOpacity(0.4),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Job Location",
+                        "Time Frame",
                         style: fontW7S12(context)!.copyWith(
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
@@ -244,7 +238,10 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
                         height: 8,
                       ),
                       Text(
-                        widget.applied.jobDetails!.jobLocation.toString(),
+                        // "",
+                        widget.all.jobDetails!.time!
+                            .replaceAll("TimeOfDay(", "")
+                            .replaceAll(")", ""),
                         // widget.active.jobLocation.toString(),
                         style: fontW7S12(context)!.copyWith(
                           fontWeight: FontWeight.w500,
@@ -259,53 +256,6 @@ class _AppliedJobCardsWidgetState extends State<AppliedJobCardsWidget> {
                 ],
               ),
             ),
-            Container(
-              height: 1,
-              width: double.infinity,
-              color: AppColors.greyColor.withOpacity(0.4),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: CommonButtonWidget(
-                        buttonHeight: 42,
-                        text: "Message",
-                        radius: 23,
-                        backgroundcolor: AppColors.cyanColor,
-                        bordercolor: AppColors.cyanColor,
-                        textfont: 12,
-                        textcolor: AppColors.blackColor,
-                        horizontalPadding: 0,
-                        onTap: () {}),
-                  ),
-                  const SizedBox(
-                    width: 30,
-                  ),
-                  Expanded(
-                    child: CommonButtonWidget(
-                        buttonHeight: 42,
-                        text: "Withdraw",
-                        radius: 23,
-                        textfont: 12,
-                        backgroundcolor: AppColors.redColor,
-                        horizontalPadding: 0,
-                        bordercolor: AppColors.redColor,
-                        onTap: () {
-                          // toNext(
-                          //     context: context,
-                          //     widget: SubmitProposalAppliedScreen(
-                          //       applied: widget.applied,
-                          //     ));
-                        }),
-                  )
-                ],
-              ),
-            )
           ],
         ),
       ),
