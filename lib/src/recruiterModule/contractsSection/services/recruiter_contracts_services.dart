@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:get_paid/helpers/ApiHelpers/dio_service.dart';
 import 'package:get_paid/src/recruiterModule/contractsSection/models/recruiter_contract_details_model.dart';
 import 'package:get_paid/src/recruiterModule/contractsSection/models/recruiter_contracts_model.dart';
-
 import '../../../../helpers/hive_local_storage.dart';
 import '../../../../helpers/showsnackbar.dart';
 import '../../../../utils/api_constants.dart';

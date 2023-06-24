@@ -11,6 +11,7 @@ import 'package:get_paid/utils/appcolors.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../utils/theme.dart';
+import '../../contractsSection/providers/recruiter_contracts_provider.dart';
 import '../../jobSection/screens/job_details_screen.dart';
 import '../../notificationSection/screens/notification_screen.dart';
 import '../widgets/dashboard_card_widget.dart';
@@ -29,16 +30,21 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     context
         .read<RecruiterDashBoardProviders>()
         .getRecruiterDashBoardDataProvider();
+    context
+        .read<RecruiterContractsProvider>()
+        .getContractsOfRecruiterProvider();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RecruiterDashBoardProviders>(
-        builder: (context, recruiterDashBoardProvider, __) {
+    return Consumer2<RecruiterDashBoardProviders, RecruiterContractsProvider>(
+        builder: (context, recruiterDashBoardProvider,
+            recruiterContractsProvider, __) {
       return Scaffold(
         // resizeToAvoidBottomInset: false,
-        body: recruiterDashBoardProvider.recruiterDashBoardModel == null
+        body: recruiterDashBoardProvider.recruiterDashBoardModel == null &&
+                recruiterContractsProvider.recruiterContractsModel == null
             ? const SpinKitPulse(
                 color: AppColors.appcolor,
                 size: 32,
@@ -233,10 +239,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           Expanded(
                             flex: 5,
                             child: DashboaedCardWidget(
-                              count: recruiterDashBoardProvider
-                                  .recruiterDashBoardModel!
-                                  .dashboardData!
-                                  .activeContracts
+                              count: recruiterContractsProvider
+                                  .recruiterContractsModel!.data!.all!.length
                                   .toString(),
                               text: "Active Contracts",
                               onTap: () {},

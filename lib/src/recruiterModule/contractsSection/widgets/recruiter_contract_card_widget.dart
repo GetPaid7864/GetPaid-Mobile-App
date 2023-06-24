@@ -8,6 +8,7 @@ import 'package:get_paid/helpers/navigatorHelper.dart';
 
 import 'package:get_paid/src/jobSeekerModule/dashboardSection/screens/jobseeker_job_details_screen.dart';
 import 'package:get_paid/src/jobSeekerModule/proposalSection/screens/submit_a_proposal_Screen.dart';
+import 'package:get_paid/src/recruiterModule/contractsSection/screens/contract_details_screen.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../../utils/appcolors.dart';
@@ -33,11 +34,11 @@ class _RecruiterContractCardsWidgetState
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // toNext(
-        //     context: context,
-        //     widget: JobSeekerJobDetailsScreen(
-        //       recentJob: widget.all,
-        //     ));
+        toNext(
+            context: context,
+            widget: RecruiterContractDetailsScreen(
+              contractID: widget.all.id.toString(),
+            ));
       },
       child: Container(
         // height: 260,
