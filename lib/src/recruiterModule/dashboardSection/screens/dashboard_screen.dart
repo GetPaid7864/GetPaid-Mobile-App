@@ -250,6 +250,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         ],
                       ),
                     ),
+
                     const SizedBox(
                       height: 15,
                     ),
