@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_paid/helpers/navigatorHelper.dart';
 import 'package:get_paid/src/jobSeekerModule/authenticatonSection/providers/authProvider.dart';
 import 'package:get_paid/src/jobSeekerModule/myProfileSecction/providers/jobseeker_myprofile_provider.dart';
 import 'package:loading_overlay/loading_overlay.dart';
@@ -8,9 +9,11 @@ import 'package:provider/provider.dart';
 
 import '../../../../commonWidgets/cacheNetworkImageWidget.dart';
 import '../../../../helpers/showsnackbar.dart';
+import '../../../../utils/api_constants.dart';
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/theme.dart';
 import '../../../recruiterModule/profileSection/widgets/settings_card_widget.dart';
+import 'jobseeker_my_profile_screen.dart';
 
 class JobSeekerAccountScreen extends StatefulWidget {
   const JobSeekerAccountScreen({Key? key}) : super(key: key);
@@ -38,9 +41,9 @@ class _JobSeekerAccountScreenState extends State<JobSeekerAccountScreen> {
         ),
         child: Scaffold(
           body: jobSeekerMyProfileProvider.jobSeekerProfileModel == null
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 60),
-                  child: const SpinKitPulse(
+              ? const Padding(
+                  padding: EdgeInsets.only(top: 60),
+                  child: SpinKitPulse(
                     size: 30,
                     color: AppColors.appcolor,
                   ),
@@ -85,100 +88,112 @@ class _JobSeekerAccountScreenState extends State<JobSeekerAccountScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: SizedBox(
-                              height: 100,
-                              width: MediaQuery.of(context).size.width,
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(13),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          CacheNetworkImageWidget(
-                                            // imgUrl: getRecruiterProfileModel
-                                            //     .data!.first.v
-                                            //     .toString(),
-                                            imgUrl: "",
-                                            radius: 33,
-                                          ),
-                                          const SizedBox(
-                                            width: 20,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "Muhammad Sohaib",
-                                                // getRecruiterProfileModel
-                                                //     .data!.first.name
-                                                //     .toString(),
-                                                style: fontW7S12(context)!
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize: 17,
-                                                        color: AppColors
-                                                            .blackColor),
-                                              ),
-                                              const SizedBox(
-                                                height: 3,
-                                              ),
-                                              Text(
-                                                // "sohaibjameel3@gmail.com",
-                                                jobSeekerMyProfileProvider
-                                                    .jobSeekerProfileModel!
-                                                    .data!
-                                                    .first
-                                                    .email
-                                                    .toString(),
-                                                style: fontW7S12(context)!
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 12,
-                                                        color:
-                                                            AppColors.appcolor),
-                                              ),
-                                              const SizedBox(
-                                                height: 3,
-                                              ),
-                                              Text(
-                                                // "+92347585494",
-                                                jobSeekerMyProfileProvider
-                                                    .jobSeekerProfileModel!
-                                                    .data!
-                                                    .first
-                                                    .phoneNumber
-                                                    .toString(),
-                                                style: fontW7S12(context)!
-                                                    .copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 12,
-                                                        color: AppColors
-                                                            .blackColor),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      SvgPicture.asset(
-                                        "assets/images/editicon.svg",
-                                        color: AppColors.appcolor,
-                                        // height: 150,
-                                        // width: 150,
-                                      ),
-                                    ],
+                            child: InkWell(
+                              onTap: () {
+                                toNext(
+                                    context: context,
+                                    widget: JobSeekerMyProfileScreen());
+                              },
+                              child: SizedBox(
+                                height: 100,
+                                width: MediaQuery.of(context).size.width,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(13),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            CacheNetworkImageWidget(
+                                              // imgUrl: getRecruiterProfileModel
+                                              //     .data!.first.v
+                                              //     .toString(),
+                                              imgUrl: Apis.imageBaseUrl
+                                                      .toString() +
+                                                  jobSeekerMyProfileProvider
+                                                      .jobSeekerProfileModel!
+                                                      .data!
+                                                      .first
+                                                      .photo
+                                                      .toString(),
+                                              radius: 33,
+                                            ),
+                                            const SizedBox(
+                                              width: 20,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  //"Muhammad Sohaib",
+                                                  "${jobSeekerMyProfileProvider.jobSeekerProfileModel!.data!.first.personalInfo!.firstName} ${jobSeekerMyProfileProvider.jobSeekerProfileModel!.data!.first.personalInfo!.lastName}",
+                                                  style: fontW7S12(context)!
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 17,
+                                                          color: AppColors
+                                                              .blackColor),
+                                                ),
+                                                const SizedBox(
+                                                  height: 3,
+                                                ),
+                                                Text(
+                                                  // "sohaibjameel3@gmail.com",
+                                                  jobSeekerMyProfileProvider
+                                                      .jobSeekerProfileModel!
+                                                      .data!
+                                                      .first
+                                                      .email
+                                                      .toString(),
+                                                  style: fontW7S12(context)!
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 12,
+                                                          color: AppColors
+                                                              .appcolor),
+                                                ),
+                                                const SizedBox(
+                                                  height: 3,
+                                                ),
+                                                Text(
+                                                  // "+92347585494",
+                                                  jobSeekerMyProfileProvider
+                                                      .jobSeekerProfileModel!
+                                                      .data!
+                                                      .first
+                                                      .phoneNumber
+                                                      .toString(),
+                                                  style: fontW7S12(context)!
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 12,
+                                                          color: AppColors
+                                                              .blackColor),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        SvgPicture.asset(
+                                          "assets/images/editicon.svg",
+                                          color: AppColors.appcolor,
+                                          // height: 150,
+                                          // width: 150,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -222,11 +237,11 @@ class _JobSeekerAccountScreenState extends State<JobSeekerAccountScreen> {
                       height: 15,
                     ),
                     SettingsCardWidget(
-                      text: 'Language',
+                      text: 'My Reviews',
                       icon: 'assets/images/changelanguage.svg',
                       onTap: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     SettingsCardWidget(

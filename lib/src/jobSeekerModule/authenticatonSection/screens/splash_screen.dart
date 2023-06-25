@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
 import 'package:get_paid/helpers/showsnackbar.dart';
+import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/create_account_screen.dart';
 import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/sign_in_screen.dart';
 import 'package:get_paid/src/jobSeekerModule/bottomNavBar/screens/jobseeker_botttom_navbar.dart';
 import 'package:get_paid/src/recruiterModule/AuthSection/screens/sign_in_screen.dart';
@@ -55,6 +56,10 @@ class _SplashScreenState extends State<SplashScreen> {
           toRemoveAll(context: context, widget: const BottomNavScreen());
         } else if (userToken != null &&
             currentRoute == JobSeekerSignInScreen.routeName) {
+          toRemoveAll(
+              context: context, widget: const JobSeekerBottomNavScreen());
+        } else if (userToken != null &&
+            currentRoute == JobSeekerSignUpScreen.routeName) {
           toRemoveAll(
               context: context, widget: const JobSeekerBottomNavScreen());
         }

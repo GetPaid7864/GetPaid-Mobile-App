@@ -95,11 +95,16 @@ class JobSeekerAuthServices {
     };
     log(variables.toString());
     FormData body = FormData.fromMap(variables);
-    Response response = await dioServices.postAuth(Apis.register, body: {
-      "password": password,
-      "phoneNumber": phoneNumber,
-      "email": email
-    });
+    Response response =
+        await dioServices.postAuth(Apis.registerJobSeeker, body: body
+
+            // {
+            //   "password": password,
+            //   "phoneNumber": phoneNumber,
+            //   "email": email
+            // }
+
+            );
     var jsonResponse = response.data;
 
     dp(msg: "user token", arg: jsonResponse);

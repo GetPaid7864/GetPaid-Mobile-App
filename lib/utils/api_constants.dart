@@ -1,6 +1,8 @@
 class Apis {
   static const String baseUrl = 'http://52.60.46.195/dev/api/v1/';
 
+  static const String imageBaseUrl = 'http://52.60.46.195/dev/';
+
   ///Recruiter Side
   static const String register = '/recruiter';
 
@@ -45,7 +47,6 @@ class Apis {
   static const String jobSeekerDashboardDataEndPoint = 'jobs/dashboard/';
 
   static const String getProposalsOfJobSeeker = 'proposal/';
-
   static const String createProposal = 'proposals';
   static const String getJobSeekerProfile = 'job-seeker/';
   static const String updateJobSeeker = 'job-seeker';

@@ -5,7 +5,6 @@ import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/sign_i
 import 'package:get_paid/src/jobSeekerModule/authenticatonSection/widgets/jobseeker_phone_textfield_widget.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../commonWidgets/button_widget.dart';
 import '../../../../commonWidgets/textfield_widget.dart';
 import '../../../../utils/appcolors.dart';
