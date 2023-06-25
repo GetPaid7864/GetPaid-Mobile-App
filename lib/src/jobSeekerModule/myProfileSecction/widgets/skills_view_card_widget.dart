@@ -21,20 +21,20 @@ class SkillViewCardWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 text,
                 style: fontW4S12(context)!
                     .copyWith(fontSize: 13, fontWeight: FontWeight.w700),
               ),
-              InkWell(
-                  onTap: onTap,
-                  child: Icon(
-                    Icons.clear,
-                    size: 20,
-                    color: AppColors.appcolor,
-                  )),
+              // InkWell(
+              //     onTap: onTap,
+              //     child: Icon(
+              //       Icons.clear,
+              //       size: 20,
+              //       color: AppColors.appcolor,
+              //     )),
             ],
           ),
         ),

@@ -130,6 +130,7 @@ class OverViewWorkHistoryTab extends StatelessWidget {
                   flex: 6,
                   child: GridView.builder(
                       padding: EdgeInsets.only(),
+                      physics: NeverScrollableScrollPhysics(),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
