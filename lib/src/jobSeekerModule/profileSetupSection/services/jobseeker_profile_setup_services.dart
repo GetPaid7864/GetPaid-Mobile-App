@@ -31,6 +31,7 @@ class JobSeekerProfileSetupServices {
       boxName: TextUtils.recruiterIDBox,
       key: TextUtils.recruiterIdKey,
     );
+
     Map<String, dynamic> variables = {
       "jobSeekerId": jobSeekerID,
       "personalInfo[firstName]": firstNameController,
@@ -38,6 +39,7 @@ class JobSeekerProfileSetupServices {
       "personalInfo[dob]": dateOfBirth,
       "personalInfo[jobTitle]": jobTitleController,
     };
+
     log(variables.toString());
     FormData body = FormData.fromMap(variables);
     Response response =

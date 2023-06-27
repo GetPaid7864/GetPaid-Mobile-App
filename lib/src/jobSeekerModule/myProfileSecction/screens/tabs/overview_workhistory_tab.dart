@@ -3,11 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get_paid/src/jobSeekerModule/myProfileSecction/models/job_seeker_profile_model.dart';
 import 'package:get_paid/src/jobSeekerModule/myProfileSecction/widgets/language_view_card_widget.dart';
 import 'package:get_paid/src/jobSeekerModule/myProfileSecction/widgets/skills_view_card_widget.dart';
-import 'package:get_paid/src/jobSeekerModule/profileSetupSection/widgets/skills_card_widget.dart';
 
 import '../../../../../utils/appcolors.dart';
 import '../../../../../utils/theme.dart';
-import '../../../profileSetupSection/widgets/education_card_widget.dart';
 import '../../widgets/education_view_card_widget.dart';
 
 class OverViewWorkHistoryTab extends StatelessWidget {
@@ -46,11 +44,12 @@ class OverViewWorkHistoryTab extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Expanded(
-                  flex: 2,
+                SizedBox(
+                  height:
+                      jobSeekerProfileDatum.education!.length == 1 ? 100 : 200,
                   child: ListView.builder(
                       padding: const EdgeInsets.only(),
-                      physics: NeverScrollableScrollPhysics(),
+                      // physics: NeverScrollableScrollPhysics(),
                       itemCount: jobSeekerProfileDatum.education!.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
@@ -82,12 +81,13 @@ class OverViewWorkHistoryTab extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Expanded(
-                  flex: 5,
+                Container(
+                  height:
+                      jobSeekerProfileDatum.languages!.length == 1 ? 70 : 150,
                   child: ListView.builder(
                       padding: EdgeInsets.only(),
                       itemCount: jobSeekerProfileDatum.languages!.length,
-                      physics: NeverScrollableScrollPhysics(),
+                      // physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),
@@ -140,8 +140,8 @@ class OverViewWorkHistoryTab extends StatelessWidget {
                         // Spacing between columns
                         mainAxisSpacing: 5.0, // Spacing between rows
                       ),
-                      itemCount: jobSeekerProfileDatum
-                          .skills!.length, // Total number of items in the grid
+                      itemCount: jobSeekerProfileDatum.skills!.length,
+                      // Total number of items in the grid
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),

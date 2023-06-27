@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get_paid/helpers/navigatorHelper.dart';
 import 'package:get_paid/src/jobSeekerModule/myProfileSecction/providers/jobseeker_myprofile_provider.dart';
 import 'package:get_paid/src/jobSeekerModule/myProfileSecction/screens/tabs/jobseeker_reviews_tab.dart';
 import 'package:get_paid/src/jobSeekerModule/myProfileSecction/screens/tabs/overview_workhistory_tab.dart';
-import 'package:get_paid/src/recruiterModule/profileSection/providers/recruiter_profile_provider.dart';
-import 'package:get_paid/src/recruiterModule/profileSection/screens/profileTabs/analytices_tab.dart';
-import 'package:get_paid/src/recruiterModule/profileSection/screens/profileTabs/reviews_tab.dart';
-import 'package:get_paid/src/recruiterModule/profileSection/screens/settings_screen.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../commonWidgets/cacheNetworkImageWidget.dart';
 import '../../../../utils/appcolors.dart';
 import '../../../../utils/theme.dart';
@@ -79,9 +75,16 @@ class _JobSeekerMyProfileScreenState extends State<JobSeekerMyProfileScreen> {
                                   padding: const EdgeInsets.only(
                                       left: 12, right: 20),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
+                                      InkWell(
+                                          onTap: () {
+                                            Navigator.maybePop(context);
+                                          },
+                                          child: const Icon(Icons.arrow_back)),
+                                      const SizedBox(
+                                        width: 15,
+                                      ),
                                       Text(
                                         "Profile",
                                         style: fontW7S12(context)!.copyWith(
