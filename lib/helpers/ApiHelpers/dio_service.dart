@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:get_paid/helpers/navigatorHelper.dart';
 
+import '../../src/jobSeekerModule/authenticatonSection/screens/sign_in_screen.dart';
 import '../../src/recruiterModule/AuthSection/screens/sign_in_screen.dart';
 import '../../utils/api_constants.dart';
 import '../../utils/snak_bar_widget.dart';
@@ -249,16 +250,28 @@ class DioServices {
       log(e.toString());
       if (!noInternet && e.response!.statusCode == 401) {
         log(e.toString());
+        var currentRoute = await HiveLocalStorage.readHiveValue(
+          boxName: TextUtils.currentRouteBox,
+          key: TextUtils.currentRouteKey,
+        );
 
         // GoRouter.of(RoutesUtils.cNavigatorState.currentState!.context)
         //     .go(LoginScreen.route);
 
-        toNext(
-            context: navstate.currentState!.context,
-            widget: const RecruiterSignInScreen());
-        showErrorSnackBarMessage(
-            message: "Sesstion Expired Please LogIn Again");
-        showErrorSnackBarMessage(message: "Session Expired!Please Login again");
+        if (userToken != null &&
+            currentRoute == RecruiterSignInScreen.routeName) {
+          toRemoveAll(
+              context: navstate.currentState!.context,
+              widget: const RecruiterSignInScreen());
+        } else if (userToken != null &&
+            currentRoute == JobSeekerSignInScreen.routeName) {
+          toRemoveAll(
+              context: navstate.currentState!.context,
+              widget: const JobSeekerSignInScreen());
+        }
+
+        showErrorSnackBarMessage(message: "Session Expired Please LogIn Again");
+        //showErrorSnackBarMessage(message: "Session Expired!Please Login again");
         // Utils.pushAndRemoveUntil(page: const SignInScreen());
         throw ('User not authorised. Please login again');
       }

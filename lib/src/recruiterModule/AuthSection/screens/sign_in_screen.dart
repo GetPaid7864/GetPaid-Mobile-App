@@ -95,7 +95,7 @@ class _RecruiterSignInScreenState extends State<RecruiterSignInScreen> {
                         height: 10,
                       ),
                       Text(
-                        FrontEndTextUtils.pleaseenteryourcredentials,
+                        FrontEndTextUtils.pleaseenteryourcredentialsRecruiter,
                         style: fontW3S12(context),
                       ),
                     ],

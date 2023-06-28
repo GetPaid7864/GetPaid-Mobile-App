@@ -2,7 +2,10 @@ class FrontEndTextUtils {
   static String appName = "Get Paid";
 
   static String signIn = "Sign In";
-  static String pleaseenteryourcredentials = "Please enter your credentials";
+  static String pleaseenteryourcredentials =
+      "Please enter your credentials jobseeker";
+  static String pleaseenteryourcredentialsRecruiter =
+      "Please enter your credentials Recruiter";
   static String sendedYouEmailAddress =
       "We’ll send a reset link on your registered email address.";
 

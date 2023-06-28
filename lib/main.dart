@@ -1,4 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_paid/src/jobSeekerModule/authenticatonSection/providers/authProvider.dart';
 import 'package:get_paid/src/jobSeekerModule/authenticatonSection/screens/create_account_screen.dart';
@@ -25,7 +25,6 @@ import 'package:get_paid/utils/theme.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
-import 'firebase_options.dart';
 import 'helpers/navigatorHelper.dart';
 
 Future<void> main() async {
@@ -34,9 +33,9 @@ Future<void> main() async {
 
 // ...
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
   runApp(const MyApp());
 }
 
